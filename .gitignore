@@ -41,3 +41,10 @@ $RECYCLE.BIN/
 Network Trash Folder
 Temporary Items
 .apdisk
+
+# VS Multi-device Hybrid app files
+bin/
+*.sln
+*.jsproj
+*.jsproj.user
+merges/

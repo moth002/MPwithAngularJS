@@ -1,0 +1,125 @@
+﻿body, html
+{
+    padding:0;
+    margin:0;
+    font-family: Helvetica, Arial, sans-serif;
+    font-size: 12px;
+    font-weight: normal;
+    overflow:visible;
+    width:100%;
+    height:100%;
+}
+
+.frame
+{
+    margin: auto;
+    width:100%;
+    height:100%;
+}
+
+.data-text {
+    padding-left: 10px;
+    color: steelblue;
+    font-size: 14px; 
+}
+
+.blockData {
+    display: inline-table;
+    font-size: 12px;
+}
+
+.blockPhoto {
+    
+}
+
+.rowBox {
+    display: table-row;
+}
+
+.eclair-mobile-frame    
+{
+    /*margin: 10px 10px 0 10px;*/
+    padding:20px;
+    padding-right: 0px;
+    
+    /* Background images */
+    background-image:url("../Content/images/sysmex_logo.png");
+    background-size: auto 44px, 100% auto;
+    background-position:1px top, 40px 65px, left bottom;
+    background-repeat:no-repeat;  
+}
+
+.c1
+{
+    margin-top: 40px;
+}
+
+.c2 {
+    margin-top: 10px; 
+    font-size: 12px;  
+}
+
+.c3
+{
+    /* Inner content */
+    margin-top: 10px;  
+}
+.error-message {
+    margin-top: 30px;
+    font-size: 16px;
+}
+
+.welcome-message
+{ 
+    display:block;
+    font-family: Arial;
+    font-size: 16px;
+    color: #005BAC;
+}
+
+form {
+    /*margin-top: 10px;*/
+    /*margin-right: 20px;*/
+    font-size: 1.2em;
+    font-weight: bold;
+}
+
+form.login-input {
+    display: block;
+    background: transparent;
+    width: 95%;
+    font-size: 1.2em;
+}
+
+form.label {
+    display: block;
+    background: transparent;
+    width: 95%;
+    font-size: 1.2em;
+}
+
+.logon-button {
+    background-color: white;
+}
+
+.button-scan-container {
+    padding-left: 50%;
+}
+
+button {
+    background-color: white;
+    -webkit-border-radius: 50px;
+    padding: 10px;
+    color: steelblue
+}
+
+a {
+    color: steelblue;
+    background-color: white;
+    -webkit-border-radius: 50px;
+}
+
+.patient_image {
+    float: right;
+    margin-top: 20px;
+}
