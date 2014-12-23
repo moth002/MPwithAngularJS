@@ -2,39 +2,61 @@
 <html ng-app="myApp">
 <head>
     <meta charset="utf-8" />
-    <title>MPwithAngularJS</title>
+    <title></title>
 
     <!-- MPwithAngularJS references -->
-    <link href="css/index.css" rel="stylesheet" />
-    <link rel="stylesheet" href="Content/jquery.mobile-1.4.2.css" />
-    <link rel="stylesheet" href="Content/jquery.mobile.eclair.theme.css" />
-    <script src="scripts/jquery-1.8.0.min.js"></script>
-    <script src="scripts/jquery.mobile-1.4.2.min.js"></script>
-</head>
-<body>
-    <div id="home" data-role="page" data-theme="y">
-        <div data-role="header" data-position="fixed" data-theme="y">
-            <img style="display: block; margin-left: auto; margin-right: auto; height: 45px;" src="./Content/images/header_logo.png" />
-        </div>
-        <div role="main" class="ui-content">
-            <div class="frame">
-                <div class="eclair-mobile-frame">
-                    <!--<div ng-view></div>-->
-                </div>
-            </div>
-        </div>
-        <div data-role="footer" data-position="fixed" data-theme="y">
-            <!--<a ng-href="#/nurse">next</a>-->
-            <button style="float: right;" id="button-next" data-icon="arrow-r" data-iconpos="right" data-inline="true" onclick="window.location ='#/nurse'">Next</button>
-            <!--<input type="submit" id="logon-button" value="Log on" data-inline="true" data-icon="check" class="ui-btn" aria-disabled="false"/>-->
-        </div>
-    </div>
 
+    <link href="Content/ionic.css" rel="stylesheet" />
+    <link href="css/index.css" rel="stylesheet" />
+    <link href="css/ionic.eclair.theme.css" rel="stylesheet" />
+    <!--<link rel="stylesheet" href="Content/jquery.mobile.eclair.theme.css"/>-->
+
+    <script src="scripts/ionic.bundle.js"></script>
+    <script src="scripts/angular.min.js"></script>
+    <script src="scripts/angular-route.min.js"></script>
     <!-- Cordova reference, this is added to your app when it's built. -->
     <script src="cordova.js"></script>
     <script src="scripts/platformOverrides.js"></script>
-    <script src="scripts/angular.min.js"></script>
-    <script src="scripts/angular-route.min.js"></script>
+
     <script src="scripts/main.js"></script>
+
+</head>
+<body>
+
+    <ion-header-bar class="bar-eclair">
+        <button class="button button-icon icon ion-navicon"></button>
+        <h1 class="title"><img class="title-image" src="./Content/images/header_logo.png" width="165" height="45" /></h1>
+    </ion-header-bar>
+
+    <ion-content padding="true">
+        <div class="eclair-mobile-frame">
+            <div ng-view></div>
+        </div>
+    </ion-content>
+
+    <ion-footer-bar class="bar-eclair">
+    
+    </ion-footer-bar>
+
+
+<!--<div data-role="page" data-theme="y">
+    <div data-role="header" data-position="fixed" data-theme="y">
+        <img style="display: block; margin-left: auto; margin-right: auto; height: 45px;" src="./Content/images/header_logo.png"/>
+    </div>
+    <div role="main" class="ui-content">
+        <div class="frame">
+            <div class="eclair-mobile-frame">
+                <div ng-view></div>
+            </div>
+        </div>
+    </div>
+    <div data-role="footer" data-position="fixed" data-theme="y">
+        <!--<a ng-href="#/nurse">next</a>-->
+        <!--<button style="float: right;" id="button-next" data-icon="arrow-r" data-iconpos="right" data-inline="true" onclick=" window.location = '#/nurse' ">Next</button>-->
+        <!--<input type="submit" id="logon-button" value="Log on" data-inline="true" data-icon="check" class="ui-btn" aria-disabled="false"/>-->
+    <!--</div>
+</div>-->
+
+
 </body>
 </html>
