@@ -55,3 +55,6 @@ merges/
 
 # AngularJS local files
 scripts/i18n/
+
+# VS plugins only
+plugins/

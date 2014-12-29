@@ -13,3 +13,7 @@
         border: 0;
         border-top: 5px solid #b6d55f;
     }   
+
+    .button.button-scan {
+        float: right;
+    }

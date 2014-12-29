@@ -1,15 +1,12 @@
 ﻿<div class="c1"></div>
 <div class="c3">
-    <!--<div ng-view></div>-->
     <div class="welcome-message">{{model.message}}</div>
-    <hr />
-    <!--<div data-role="field-container">
-        <label for="NurseId">Nurse ID</label>
-        <input type="text" id="NurseId" name="NurseId" class="login-input ui-input-text ui-mini ui-body-z ui-corner-all"/>
-    </div>-->
+    <hr/>
     <div class="list">
         <label class="item item-input">
-            <input type="text" placeholder="Nurse ID">
+            <input ng-model="nurseId" type="text" placeholder="Nurse ID" />
         </label>
     </div>
+    <!--<a ng-href="#/camera">scan</a>-->
+    <button class="button button-outline button-scan button-positive icon-left ion-qr-scanner" ng-click="scanCode()">Scan</button>
 </div>
