@@ -1,37 +1,20 @@
-﻿<div class="c1">
+﻿
+
+<div class="c1">
     <table>
         <tr>
             <td style="text-align: right; font-size: 12px;">User</td>
-            <td><span class="data-text">Nurse Jack Jill</span></td>
+            <td style="width: 100%;"><span class="data-text">Nurse Jack Jill</span></td>
         </tr>
     </table>
 </div>
 <div class="c3">
-    <!--<div class="welcome-message">Scan the patient's wristband or enter the NHI</div>-->
     <div class="welcome-message">{{model.message}}</div>
     <hr />
-    <div data-role="field-container">
-        <label for="PatientId">Patient NHI</label>
-        <input type="text" id="PatientId" name="PatientId" class="login-input ui-input-text ui-mini ui-body-z ui-corner-all" />
-        <!--<script language="javascript">
-            // Store
-            var parameters = location.search.substring(1).split("&");
-            var temp = parameters[0].split("=");
-            if (temp[0] == "Nhi") {
-                nhi = unescape(temp[1]);
-            } else {
-                nhi = "undefined";
-            }
-            localStorage.setItem("patientId", nhi);
-            // Retrieve
-            if (nhi.indexOf("undefined") == -1) {
-                document.getElementById("PatientId").value = localStorage.getItem("patientId");
-            } else {
-                document.getElementById("PatientId").value = "";
-            }
-        </script>-->
+    <div class="list">
+        <label class="item item-input">
+            <input ng-model="nurseId" type="text" placeholder="Patient NHI" />
+        </label>
     </div>
-    <div class="button-scan-container" data-role="field-container">
-        <!--<a href="cameraDialog.html" class="ui-btn ui-icon-camera ui-btn-icon-left" data-theme="y" data-rel="dialog">Scan</a>-->
-    </div>
+    <button class="button button-outline button-scan button-positive icon-left ion-camera" ng-click="scanCode()">Scan</button>
 </div>

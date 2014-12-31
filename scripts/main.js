@@ -1,50 +1,59 @@
 ﻿angular.module("myApp", ['ionic', 'ngRoute'])
 
-//.config(function ($compileProvider) {
-//    $compileProvider.imgSrcSanitizationWhitelist(/^\s*(https?|ftp|mailto|file|tel):/);
-//})
+//Add this to have access to a global variable
+.run(function ($rootScope) {
+    $rootScope.globalVariable = 'Amadou'; //global variable
+})
 
-//.run(function ($ionicPlatform) {
-//    $ionicPlatform.ready(function () {
-//        if (window.StatusBar) {
-//            // org.apache.cordova.statusbar required
-//            StatusBar.styleDefault();
-//        }
-//    });
-//})
+.factory('RightButton', function () {
+    return {
+        text: "Next"
+    };
+})
+
+.factory('BtnServices', function() {
+    var rightButton = {
+        title: 'Next',
+        show: false
+    };
+    
+    return {
+        getRight: function() {
+            return rightButton;
+        },
+        setRight: function(t, s){
+            rightButton.title = t;
+            rightButton.show = s;
+        }
+    }
+})
 
 .config(["$routeProvider", function ($routeProvider) {
-    $routeProvider.when("/:nid?", {
+    $routeProvider.when("/", {
         templateUrl: "views/main.html",
         controller: "MainCtrl"
-    });
-    $routeProvider.when("/nurse", {
+    })
+    .when("/nurse/:nurseId", {
         templateUrl: "views/nurse.html",
         controller: "NurseCtrl"
-    });
-    $routeProvider.otherwise({
+    })
+    .otherwise({
                     redirectTo: '/'
     });
 }])
 
-
-//app.controller("MainCtrl", ['$scope', function ($scope) {
-//    alert("Hello");
-//    $scope.$on("$includeContentLoaded", function () {
-//        $("#mainDiv").trigger("create");
-//    });
-//}]);
-
-.controller("MainCtrl", ['$scope', '$routeParams', function ($scope, $routeParams) {
+.controller("MainCtrl", ['$scope', 'BtnServices', function ($scope, BtnServices) {
     $scope.model = {
         message: "Scan or enter your ID"
     }
-    $scope.nurseId = $routeParams.nid ? $routeParams.nid : "";
+
+    BtnServices.setRight('Next', true);
     
     $scope.scanCode = function() {
         cordova.plugins.barcodeScanner.scan(
             function (result) {
-                window.location = '#/' + result.text;
+                $scope.nurseId = result.text;
+                window.location = '#/nurse/' + result.text;
                 //alert("We got a barcode\n" +
                 //    "Result: " + result.text + "\n" +
                 //    "Format: " + result.format + "\n" +
@@ -62,9 +71,35 @@
 
 }])
 
+.controller("BtnCtrl", ['$scope', 'BtnServices', function ($scope, BtnServices) {
 
-//.controller("NurseCtrl", ['$scope', function ($scope) {
-//    $scope.model = {
-//        message: "Scan the patient's wristband or enter the NHI"
-//    }
-//}]);
+    $scope.buttonClicked = function () {
+        window.location = '#/nurse/' + $scope.nurseId;
+    }
+    $scope.btnCancel = function () {
+        window.location = '#/';
+    }
+
+    $scope.rightButton = BtnServices.getRight();
+}])
+
+.controller("NurseCtrl", ['$scope', function ($scope) {
+    $scope.model = {
+        message: "Scan the patient's wristband or enter the NHI"
+    }
+
+    $scope.scanCode = function () {
+        cordova.plugins.barcodeScanner.scan(
+            function (result) {
+                window.location = '#/order/' + result.text;
+                //alert("We got a barcode\n" +
+                //    "Result: " + result.text + "\n" +
+                //    "Format: " + result.format + "\n" +
+                //    "Cancelled: " + result.cancelled);
+            },
+            function (error) {
+                alert("Scanning failed: " + error);
+            }
+        );
+    }
+}])

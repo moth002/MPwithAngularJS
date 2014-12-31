@@ -26,7 +26,12 @@
 
     <ion-header-bar class="bar-eclair">
         <button class="button button-icon icon ion-navicon"></button>
-        <h1 class="title"><img class="title-image" src="./Content/images/header_logo.png" width="165" height="45" /></h1>
+        <h1 class="title"><img class="title-image" src="./Content/images/header_logo.png" width="165" height="39"/>
+        </h1>
+        <ion-nav-bar>
+            <ion-nav-back-button>
+            </ion-nav-back-button>
+        </ion-nav-bar>
     </ion-header-bar>
 
     <ion-content padding="true">
@@ -35,9 +40,13 @@
         </div>
     </ion-content>
 
-    <ion-footer-bar class="bar-eclair">
-    
-    </ion-footer-bar>
+    <ion-footer-bar class="bar-stable" ng-controller="BtnCtrl">
+        <div class="button-bar">
+            <button class="button button-footer icon-left ion-close-round" ng-click="btnCancel()">Cancel</button>
+            <button class="button button-footer" ng-show="middleButton.show" ng-click="buttonClicked()">{{btnText}}</button>
+            <button class="button button-footer icon-right ion-arrow-right-a" ng-show="rightButton.show" ng-click="buttonClicked()">{{rightButton.title}}</button>
+        </div>
+</ion-footer-bar>
 
 
 </body>
