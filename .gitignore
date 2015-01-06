@@ -58,3 +58,6 @@ scripts/i18n/
 
 # VS plugins only
 plugins/
+
+# WebServer files
+WebApi/

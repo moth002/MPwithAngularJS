@@ -1,4 +1,4 @@
-﻿angular.module("myApp", ['ionic', 'ngRoute'])
+﻿angular.module("myApp", ['ionic', 'ngRoute', 'ngResource'])
 
 //.run(function($ionicPlatform) {
 //    $ionicPlatform.ready(function() {
@@ -23,7 +23,7 @@
         controller: "UserCtrl"
     })
     .otherwise({
-                    redirectTo: '/'
+        redirectTo: '/'
     });
 }])
 
