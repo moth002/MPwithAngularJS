@@ -18,7 +18,7 @@
         templateUrl: "views/main.html",
         controller: "MainCtrl"
     })
-    .when("/user/:userId", {
+    .when("/user/:barcode", {
         templateUrl: "views/user.html",
         controller: "UserCtrl"
     })

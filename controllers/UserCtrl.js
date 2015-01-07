@@ -1,11 +1,12 @@
 ﻿angular.module('myApp')
     .controller("UserCtrl", [
-        '$scope', '$resource', 'FooterBtnService', function ($scope, $resource, FooterBtnService) {
-
+        '$scope', '$resource', '$routeParams', 'FooterBtnService', 'cordovaReady',
+        function ($scope, $resource, $routeParams, FooterBtnService, cordovaReady) {
             $scope.init = function () {
+                var userId = $routeParams.barcode;
 
-                var User = $resource('http://mohammed-pc/WebApi/api/user/:userId', { userId: '@id' });
-                var user = User.get({ userId: 123456 }, function () {
+                var User = $resource(apiUrl + 'api/user/:userId', { userId: '@id' });
+                var user = User.get({ userId: userId }, function () {
                     $scope.user = user;
                 }, function (err) {
                     alert(err.status);
@@ -16,22 +17,19 @@
                 }
 
                 FooterBtnService.setRight('Next', true);
-                FooterBtnService.setMiddle('Re-print labels', true);
+                FooterBtnService.setMiddle('', false);
             }    
 
-            $scope.scanCode = function() {
-                cordova.plugins.barcodeScanner.scan(
-                    function(result) {
+            $scope.scanCode = function () {
+                cordovaReady(cordova.plugins.barcodeScanner.scan(
+                    function (result) {
+                        $scope.userId = result.text;
                         window.location = '#/order/' + result.text;
-                        //alert("We got a barcode\n" +
-                        //    "Result: " + result.text + "\n" +
-                        //    "Format: " + result.format + "\n" +
-                        //    "Cancelled: " + result.cancelled);
                     },
-                    function(error) {
+                    function (error) {
                         alert("Scanning failed: " + error);
                     }
-                );
+                ));
             }
         }
     ]);
