@@ -11,10 +11,10 @@
             footerBtnService.setRight('Next', true);
 
             $scope.scanCode = function() {
-                cordovaReady(cordova.plugins.barcodeScanner.scan(
+                cordovaReady(cordova.plugins.MWBScanner.startScanning(
                     function(result) {
                         //$scope.userId = result.text; must change this
-                        window.location = '#/user/' + result.text;
+                        window.location = '#/user/' + result.code;
                     },
                     function(error) {
                         alert("Scanning failed: " + error);
