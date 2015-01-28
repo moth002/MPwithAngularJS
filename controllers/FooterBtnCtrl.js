@@ -1,15 +1,14 @@
 ﻿angular.module('myApp')
     .controller("FooterBtnCtrl", [
-        '$scope', 'FooterBtnService', function($scope, FooterBtnService) {
+        '$scope', 'footerBtnService', 'dataIdService',
+            function ($scope, footerBtnService, dataIdService) {
+                $scope.idList = dataIdService.getIDs;
 
-            $scope.buttonClicked = function() {
-                window.location = '#/user/' + $scope.userId;
-            }
-            $scope.btnCancel = function() {
-                window.location = '#/';
-            }
+                $scope.btnCancel = function() {
+                    window.location = '#/';
+                }
 
-            $scope.rightButton = FooterBtnService.getRight();
-            $scope.middleButton = FooterBtnService.getMiddle();
+                $scope.rightButton = footerBtnService.getRight();
+                $scope.middleButton = footerBtnService.getMiddle();
         }
     ]);

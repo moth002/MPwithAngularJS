@@ -22,6 +22,10 @@
         templateUrl: "views/user.html",
         controller: "UserCtrl"
     })
+    .when("/patient/:barcode", {
+        templateUrl: "views/patient.html",
+        controller: "PatientCtrl"
+    })
     .otherwise({
         redirectTo: '/'
     });

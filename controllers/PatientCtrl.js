@@ -1,37 +1,39 @@
 ﻿angular.module('myApp')
-    .controller("UserCtrl", [
+    .controller("PatientCtrl", [
         '$scope', '$resource', '$routeParams', 'footerBtnService', 'cordovaReady', 'dataIdService',
         function ($scope, $resource, $routeParams, footerBtnService, cordovaReady, dataIdService) {
             $scope.init = function () {
-                var userId = $routeParams.barcode;
+                var patientId = $routeParams.barcode;
 
-                var User = $resource(window.apiUrl + 'api/user/:userId', { userId: '@id' });
-                //var User = $resource("http://mohammed-pc/Eclair/api/PhoneUserAuthenticate/1234");
-                var user = User.get({ userId: userId }, function () {
-                //var user = User.get({}, function () {
-                    $scope.user = user;
+                $scope.idList = dataIdService.getIDs();
+
+                var mPatient = $resource(window.apiUrl + 'api/patient/:patientId', { patientId: '@id' });
+                var patient = mPatient.get({ patientId: patientId }, function () {
+                    $scope.patient = patient;
                 }, function (err) {
                     alert(err.status);
                 });
 
-                dataIdService.setIDs(userId, '');
-
+                var User = $resource(window.apiUrl + 'api/user/:userId', { userId: '@id' });
+                var user = User.get({ userId: $scope.idList.userId }, function () {
+                    $scope.user = user;
+                }, function (err) {
+                    alert(err.status);
+                });
                 $scope.model = {
-                    message: "Scan the patient's wristband or enter the NHI",
-                    show: userId
+                    message: "Scan the order form or enter the order number",
+                    show: $scope.idList.userId
                 }
-
-                
 
                 footerBtnService.setRight('Next', true);
                 footerBtnService.setMiddle('', false);
-            }    
+            }
 
             $scope.scanCode = function () {
                 cordovaReady(window.cordova.plugins.barcodeScanner.scan(
                     function (result) {
-                        //$scope.userId = result.text; fix this
-                        window.location = '#/patient/' + result.text;
+                        $scope.userId = result.text;
+                        window.location = '#/order/' + result.text;
                     },
                     function (error) {
                         alert("Scanning failed: " + error);

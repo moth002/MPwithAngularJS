@@ -1,5 +1,5 @@
 ﻿angular.module('myApp')
-    .factory('FooterBtnService', function() {
+    .factory('footerBtnService', function() {
         var rightButton = {
             title: 'Next',
             show: false
