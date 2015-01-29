@@ -10,7 +10,7 @@
   <content src="index.html" />
   <access origin="*" />
   <vs:features />
-  <!--<gap:plugin name="com.phonegap.plugins.barcodescanner" version="2.0.0" />-->
+  <gap:plugin name="com.phonegap.plugins.barcodescanner" version="2.0.0" />
   <gap:plugin name="com.manateeworks.barcodescanner" version="1.5.0" />
   <preference name="SplashScreen" value="screen" />
 </widget>
