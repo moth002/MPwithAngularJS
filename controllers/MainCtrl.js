@@ -11,7 +11,6 @@
             footerBtnService.setRight('Next', true);
 
             $scope.scanCode = function() {
-                //cordovaReady(scanner.startScanning());
 
                 cordovaReady(window.cordova.plugins.barcodeScanner.scan(
                     function(result) {
