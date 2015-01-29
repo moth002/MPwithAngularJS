@@ -5,10 +5,9 @@
             $scope.init = function () {
                 var userId = $routeParams.barcode;
 
-                var User = $resource(window.apiUrl + 'api/user/:userId', { userId: '@id' });
-                //var User = $resource("http://mohammed-pc/Eclair/api/PhoneUserAuthenticate/1234");
+                //var User = $resource(window.apiUrl + 'api/user/:userId', { userId: '@id' });
+                var User = $resource('http://mohammed-pc/Eclair/api/PhoneUserAuthenticate/:userId', { userId: '@id' });
                 var user = User.get({ userId: userId }, function () {
-                //var user = User.get({}, function () {
                     $scope.user = user;
                 }, function (err) {
                     alert(err.status);
