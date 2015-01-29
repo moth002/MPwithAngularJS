@@ -11,15 +11,17 @@
             footerBtnService.setRight('Next', true);
 
             $scope.scanCode = function() {
-                cordovaReady(cordova.plugins.MWBScanner.startScanning(
-                    function(result) {
-                        //$scope.userId = result.text; must change this
-                        window.location = '#/user/' + result.code;
-                    },
-                    function(error) {
-                        alert("Scanning failed: " + error);
-                    }
-                ));
+                cordovaReady(scanner.startScanning());
+
+                //cordovaReady(window.cordova.plugins.barcodeScanner.scan(
+                //    function(result) {
+                //        //$scope.userId = result.text; must change this
+                //        window.location = '#/user/' + result.text;
+                //    },
+                //    function(error) {
+                //        alert("Scanning failed: " + error);
+                //    }
+                //));
             }
 
         }
