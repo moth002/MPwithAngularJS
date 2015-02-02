@@ -21,7 +21,7 @@
     <script src="scripts/platformOverrides.js"></script>
 
     <script type="text/javascript">
-        var apiUrl = "http://mohammed-pc/WebApi/";
+        var apiUrl = "http://mohammed-pc/Eclair/";
     </script>
 
     <script src="scripts/main.js"></script>
@@ -50,11 +50,10 @@
     <ion-footer-bar class="bar-stable" ng-controller="FooterBtnCtrl">
         <div class="button-bar">
             <button class="button button-footer icon-left ion-close-round" ng-click="btnCancel()">Cancel</button>
-            <button class="button button-footer" ng-show="middleButton.show" ng-click="buttonClicked()">{{middleButton.title}}</button>
+            <button class="button button-footer" ng-show="middleButton.show" ng-click="openModal()">{{middleButton.title}}</button>
             <button class="button button-footer icon-right ion-arrow-right-a" ng-show="rightButton.show" ng-click="buttonClicked()">{{rightButton.title}}</button>
         </div>
     </ion-footer-bar>
-
-
+    
 </body>
 </html>

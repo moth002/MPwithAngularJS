@@ -1,16 +1,16 @@
 ﻿angular.module('myApp')
     .controller("UserCtrl", [
-        '$scope', '$resource', '$routeParams', 'footerBtnService', 'cordovaReady', 'dataIdService',
-        function ($scope, $resource, $routeParams, footerBtnService, cordovaReady, dataIdService) {
+        '$scope', '$resource', '$routeParams', 'footerBtnService', 'cordovaReady', 'dataIdService', '$ionicModal', '$location', '$timeout',
+        function ($scope, $resource, $routeParams, footerBtnService, cordovaReady, dataIdService, $ionicModal, $location, $timeout) {
             $scope.init = function () {
                 var userId = $routeParams.barcode;
 
-                //var User = $resource(window.apiUrl + 'api/user/:userId', { userId: '@id' });
-                var User = $resource('http://mohammed-pc/Eclair/api/PhoneUserAuthenticate/:userId', { userId: '@id' });
+                var User = $resource(window.apiUrl + 'api/PhoneUserAuthenticate/:userId', { userId: '@id' });
                 var user = User.get({ userId: userId }, function () {
                     $scope.user = user;
                 }, function (err) {
-                    alert(err.status);
+                    alert("User is not found or pincode is wrong");
+                    window.location = '#/';
                 });
 
                 dataIdService.setIDs(userId, '');
@@ -20,22 +20,9 @@
                     show: userId
                 }
 
-                
-
                 footerBtnService.setRight('Next', true);
                 footerBtnService.setMiddle('', false);
-            }    
-
-            $scope.scanCode = function () {
-                cordovaReady(window.cordova.plugins.barcodeScanner.scan(
-                    function (result) {
-                        //$scope.userId = result.text; fix this
-                        window.location = '#/patient/' + result.text;
-                    },
-                    function (error) {
-                        alert("Scanning failed: " + error);
-                    }
-                ));
             }
+
         }
     ]);
