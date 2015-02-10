@@ -3,26 +3,26 @@
         '$scope', '$resource', '$routeParams', 'footerBtnService', 'cordovaReady', 'dataIdService',
         function ($scope, $resource, $routeParams, footerBtnService, cordovaReady, dataIdService) {
             $scope.init = function () {
-                var patientId = $routeParams.barcode;
+                var nhi = $routeParams.barcode;
 
                 $scope.idList = dataIdService.getIDs();
 
-                var mPatient = $resource(window.apiUrl + 'api/patient/:patientId', { patientId: '@id' });
-                var patient = mPatient.get({ patientId: patientId }, function () {
+                var mPatient = $resource(window.apiUrl + 'GetPatientData/:patient');
+                var patient = mPatient.get({ patient: nhi, sch: 'NHI' }, function () {
                     $scope.patient = patient;
                 }, function (err) {
                     alert(err.status);
                 });
 
-                var User = $resource(window.apiUrl + 'api/user/:userId', { userId: '@id' });
-                var user = User.get({ userId: $scope.idList.userId }, function () {
+                var User = $resource(window.apiUrl + 'GetUserAuthentication/:user');
+                var user = User.get({ user: $scope.idList.userId}, function () {
                     $scope.user = user;
                 }, function (err) {
                     alert(err.status);
                 });
+
                 $scope.model = {
-                    message: "Scan the order form or enter the order number",
-                    show: $scope.idList.userId
+                    message: "Scan the order form or enter the order number"
                 }
 
                 footerBtnService.setRight('Next', true);

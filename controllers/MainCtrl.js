@@ -66,8 +66,8 @@
                 cordovaReady(window.cordova.plugins.barcodeScanner.scan(
                     function (result) {
                         $scope.openModal();
-                        defer.promise.then(function () {
-                            window.location = '#/user/' + result.text;
+                        defer.promise.then(function (pinCode) {
+                            window.location = '#/user/' + result.text + '/pin/' + pinCode;
                         });
                     },
                     function(error) {

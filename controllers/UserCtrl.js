@@ -3,25 +3,37 @@
         '$scope', '$resource', '$routeParams', 'footerBtnService', 'cordovaReady', 'dataIdService', '$ionicModal', '$location', '$timeout',
         function ($scope, $resource, $routeParams, footerBtnService, cordovaReady, dataIdService, $ionicModal, $location, $timeout) {
             $scope.init = function () {
-                var userId = $routeParams.barcode;
+                var userCode = $routeParams.usercode;
+                var pinCode = $routeParams.pincode;
 
-                var User = $resource(window.apiUrl + 'api/PhoneUserAuthenticate/:userId', { userId: '@id' });
-                var user = User.get({ userId: userId }, function () {
+                var User = $resource(window.apiUrl + 'GetUserAuthentication/:user');
+                var user = User.get({ user: userCode, pin: pinCode }, function () {
                     $scope.user = user;
                 }, function (err) {
                     alert("User is not found or pincode is wrong");
                     window.location = '#/';
                 });
 
-                dataIdService.setIDs(userId, '');
+                dataIdService.setIDs(userCode, '');
 
                 $scope.model = {
-                    message: "Scan the patient's wristband or enter the NHI",
-                    show: userId
+                    message: "Scan the patient's wristband or enter the NHI"
                 }
 
                 footerBtnService.setRight('Next', true);
                 footerBtnService.setMiddle('', false);
+            }
+
+            $scope.scanCode = function () {
+                cordovaReady(window.cordova.plugins.barcodeScanner.scan(
+                    function (result) {
+                        $scope.patientId = result.text;
+                        window.location = '#/patient/' + result.text;
+                    },
+                    function (error) {
+                        alert("Scanning failed: " + error);
+                    }
+                ));
             }
 
         }
