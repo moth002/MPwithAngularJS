@@ -65,6 +65,7 @@
 
                 cordovaReady(window.cordova.plugins.barcodeScanner.scan(
                     function (result) {
+                        networkinterface.getIPAddress(function (ip) { alert(ip); });
                         $scope.openModal();
                         defer.promise.then(function (pinCode) {
                             window.location = '#/user/' + result.text + '/pin/' + pinCode;
