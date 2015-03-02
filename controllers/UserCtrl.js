@@ -1,39 +1,20 @@
 ﻿angular.module('myApp')
     .controller("UserCtrl", [
-        '$scope', '$http', '$routeParams', 'footerBtnService', 'cordovaReady', 'dataIdService',
-        function ($scope, $http, $routeParams, footerBtnService, cordovaReady, dataIdService) {
+        '$scope', '$resource', '$routeParams', 'footerBtnService', 'cordovaReady', 'dataIdService', '$ionicModal', '$location', '$timeout',
+        function ($scope, $resource, $routeParams, footerBtnService, cordovaReady, dataIdService, $ionicModal, $location, $timeout) {
             $scope.init = function () {
-                var userModel = {
-                    barcode: $routeParams.usercode,
-                    pincode: $routeParams.pincode
-                }
                 var userCode = $routeParams.usercode;
                 var pinCode = $routeParams.pincode;
 
-                $http.post(window.apiUrl + 'UserLogon', userModel)
-                    .success(function(response) {
-                        $scope.user = response;
-                        dataIdService.setIDs(userCode, '', response.Token);
-                    })
-                    .error(function(err, status) {
-                        if (status === 404)
-                            alert("User is not found or pincode is wrong");
-                        if (status === 400)
-                            alert(err.message);
-                        window.location = '#/';
-                    });
+                var User = $resource(window.apiUrl + 'GetUserAuthentication/:user');
+                var user = User.get({ user: userCode, pin: pinCode }, function () {
+                    $scope.user = user;
+                }, function (err) {
+                    alert("User is not found or pincode is wrong");
+                    window.location = '#/';
+                });
 
-                //var User = $resource(window.apiUrl + 'GetUserAuthentication/:id');
-                //User.get({ id: userCode, pin: pinCode }, function (response) {
-                //    $scope.user = response;
-                //    dataIdService.setIDs(userCode, '', response.Token);
-                //    //$rootScope.oauth.access_token = response.Token;
-                //}, function (err) {
-                //    if (err.statusText === 'Not Found') {
-                //        alert("User is not found or pincode is wrong");
-                //    }
-                //    window.location = '#/';
-                //});
+                dataIdService.setIDs(userCode, '');
 
                 $scope.model = {
                     message: "Scan the patient's wristband or enter the NHI"
