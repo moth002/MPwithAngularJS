@@ -2,16 +2,18 @@
     .factory('dataIdService', function () {
         var idList = {
             userId: '',
-            patientId: ''
+            patientId: '',
+            tokenId: ''
         };
 
         return {
             getIDs: function () {
                 return idList;
             },
-            setIDs: function (u, p) {              
+            setIDs: function (u, p, t) {              
                 idList.userId = u;
                 idList.patientId = p;
+                idList.tokenId = t;
             }
         }
     });

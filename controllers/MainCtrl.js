@@ -1,9 +1,33 @@
 ﻿angular.module('myApp')
     .controller("MainCtrl", [
-        '$scope', 'cordovaReady', 'footerBtnService', 'dataIdService', '$ionicModal', '$q',
-        function ($scope, cordovaReady, footerBtnService, dataIdService, $ionicModal, $q) {
+        '$scope', '$http', 'cordovaReady', 'footerBtnService', 'dataIdService', '$ionicModal', '$q',
+        function ($scope, $http, cordovaReady, footerBtnService, dataIdService, $ionicModal, $q) {
 
             var defer = $q.defer();
+
+            $scope.registration = {
+                token: "",
+                name: "",
+                pinCode: "4321",
+                barcode: "mo"
+            };
+
+            $scope.init = function () {
+                //$http.post(window.apiUrl + 'UserLogon', $scope.registration).then(function(response) {
+                //    alert('Hello');
+                //});
+                //var User = $resource(window.apiUrl + 'UserLogon');
+                //User.get({ id: 'userCode', pin: 'pinCode' }, function (response) {
+                //    //$scope.user = response;
+                //    //dataIdService.setIDs(userCode, '', response.Token);
+                //    //$rootScope.oauth.access_token = response.Token;
+                //}, function (err) {
+                //    if (err.statusText === 'Not Found') {
+                //        alert("User is not found or pincode is wrong");
+                //    }
+                //    //window.location = '#/';
+                //});
+            }
 
             $scope.passDots = '*';
 
@@ -65,7 +89,6 @@
 
                 cordovaReady(window.cordova.plugins.barcodeScanner.scan(
                     function (result) {
-                        networkinterface.getIPAddress(function (ip) { alert(ip); });
                         $scope.openModal();
                         defer.promise.then(function (pinCode) {
                             window.location = '#/user/' + result.text + '/pin/' + pinCode;
