@@ -19,8 +19,8 @@
                     .error(function (err, status) {
                         if (status === 404)
                             alert("Pateint not found");
-                        if (status === 400)
-                            alert(err.message);
+                        if (status === 401)
+                            alert("Unauthorized User");
                         window.location = '#/';
                     });
 

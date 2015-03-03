@@ -16,10 +16,11 @@
                         dataIdService.setIDs(userCode, '', response.Token);
                     })
                     .error(function(err, status) {
-                        if (status === 404)
+                        if (status === 404){
                             alert("User is not found or pincode is wrong");
-                        if (status === 400)
-                            alert(err.message);
+                        } else {
+                            alert(err.Message);
+                        }
                         window.location = '#/';
                     });
 

@@ -18,7 +18,7 @@
         $injector.get("$http").defaults.transformRequest = function (data, headersGetter) {
             var idList = dataIdService.getIDs();
             //if ($rootScope.oauth) // if there is a token
-            headersGetter()['Authorization'] = "Bearer " + idList.tokenId;
+            headersGetter()['Authorization'] = idList.tokenId;
             if (data) // original or base transformation
                 return angular.toJson(data);
         };
