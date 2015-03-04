@@ -37,6 +37,10 @@
             templateUrl: "views/patient.html",
             controller: "PatientCtrl"
         })
+        .when("/order/:orderId", {
+            templateUrl: "views/order.html",
+            controller: "OrderCtrl"
+        })
         .otherwise({
             redirectTo: '/'
         });
