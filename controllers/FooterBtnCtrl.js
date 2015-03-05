@@ -7,7 +7,7 @@
 
                 $scope.buttonClicked = function () {
                     //window.location = '#/user/' + $scope.userId;
-                    window.location = '#/user/MO/pin/1111';
+                    window.location = '#/user/MO/pin/4321';
                 }
 
                 function alertDismissed() {
