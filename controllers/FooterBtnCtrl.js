@@ -21,6 +21,7 @@
                        'Game Over',            // title
                        'Done'                  // buttonName
                    ));
+                    window.plugins.spinnerDialog.show(null, "Getting Data", true);
                     window.location = '#/';
                 }
 
