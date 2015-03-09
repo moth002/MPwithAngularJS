@@ -3,12 +3,14 @@
         '$scope', '$http', '$routeParams', 'footerBtnService', 'cordovaReady', 'dataIdService',
         function ($scope, $http, $routeParams, footerBtnService, cordovaReady, dataIdService) {
             $scope.init = function () {
-                var orderModel = {
-                    orderId: $routeParams.orderId
-                }
-                //var nhi = $routeParams.barcode;
 
                 $scope.idList = dataIdService.getIDs();
+
+                var orderModel = {
+                    orderId: $routeParams.orderId,
+                    patientId: $scope.idList.patientId
+                }
+
                 var patientModel = {
                     nhi: $scope.idList.patientId,
                     scheme: 'NHI'
