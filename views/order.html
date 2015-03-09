@@ -19,8 +19,13 @@
 </div>
 <div class="c3">
     <div class="card">
+        <div class="item item-divider">
+            Testing Requested:
+        </div>
         <div class="item item-text-wrap">
-            This is a basic Card which contains an item that has wrapping text.
+            <div ng-repeat="t in order.Tests">
+                <div>{{t}}</div>
+            </div>
         </div>
     </div>
     <!--<div class="welcome-message">{{model.message}}</div>
