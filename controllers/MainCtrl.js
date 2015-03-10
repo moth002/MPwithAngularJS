@@ -85,8 +85,7 @@
                 $scope.modal.remove();
             });
 
-            $scope.scanCode = function() {
-
+            $scope.scanCode = function () {
                 cordovaReady(window.cordova.plugins.barcodeScanner.scan(
                     function (result) {
                         $scope.openModal();
