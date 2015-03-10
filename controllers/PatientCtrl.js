@@ -1,8 +1,14 @@
 ﻿angular.module('myApp')
     .controller("PatientCtrl", [
-        '$scope', '$http', '$routeParams', 'footerBtnService', 'cordovaReady', 'dataIdService',
-        function ($scope, $http, $routeParams, footerBtnService, cordovaReady, dataIdService) {
+        '$scope', '$http', '$routeParams', 'footerBtnService', 'cordovaReady', 'dataIdService', '$q',
+        function ($scope, $http, $routeParams, footerBtnService, cordovaReady, dataIdService, $q) {
             $scope.init = function () {
+                var defer = $q.defer();
+
+                defer.promise.then(function () {
+                    cordovaReady(window.plugins.spinnerDialog.hide());
+                });
+
                 var patientModel = {
                     nhi: $routeParams.barcode,
                     scheme: 'nhi'
@@ -15,32 +21,20 @@
                     .success(function (response) {
                         $scope.patient = response;
                         dataIdService.setIDs($scope.idList.userId, nhi, $scope.idList.tokenId);
+                        defer.resolve();
                     })
                     .error(function (err, status) {
                         if (status === 404)
                             alert("Pateint not found");
                         if (status === 401)
                             alert("Unauthorized User");
+                        defer.resolve();
                         window.location = '#/';
                     });
 
                 $http.get(window.apiUrl + 'GetUserData', { params: {id: $scope.idList.userId} }).success(function(result) {
                     $scope.user = result;
                 });
-
-                //var mPatient = $resource(window.apiUrl + 'GetPatientData/:patient');
-                //var patient = mPatient.get({ patient: nhi, sch: 'NHI' }, function () {
-                //    $scope.patient = patient;
-                //}, function (err) {
-                //    alert(err.status);
-                //});
-
-                //var User = $resource(window.apiUrl + 'GetUserAuthentication/:user');
-                //var user = User.get({ user: $scope.idList.userId}, function () {
-                //    $scope.user = user;
-                //}, function (err) {
-                //    alert(err.status);
-                //});
 
                 $scope.model = {
                     message: "Scan the order form or enter the order number"
@@ -55,6 +49,7 @@
                     function (result) {
                         $scope.userId = result.text;
                         window.location = '#/order/' + result.text;
+                        window.plugins.spinnerDialog.show(null, "Getting Data", true);
                     },
                     function (error) {
                         alert("Scanning failed: " + error);

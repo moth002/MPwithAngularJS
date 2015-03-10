@@ -1,8 +1,13 @@
 ﻿angular.module('myApp')
     .controller("OrderCtrl", [
-        '$scope', '$http', '$routeParams', 'footerBtnService', 'cordovaReady', 'dataIdService',
-        function ($scope, $http, $routeParams, footerBtnService, cordovaReady, dataIdService) {
+        '$scope', '$http', '$routeParams', 'footerBtnService', 'cordovaReady', 'dataIdService', '$q',
+        function ($scope, $http, $routeParams, footerBtnService, cordovaReady, dataIdService, $q) {
             $scope.init = function () {
+                var defer = $q.defer();
+
+                defer.promise.then(function () {
+                    cordovaReady(window.plugins.spinnerDialog.hide());
+                });
 
                 $scope.idList = dataIdService.getIDs();
 
@@ -20,12 +25,14 @@
                     .success(function (response) {
                         $scope.order = response;
                         dataIdService.setIDs($scope.idList.userId, $scope.idList.patientId, $scope.idList.tokenId);
+                        defer.resolve();
                     })
                     .error(function (err, status) {
                         if (status === 404)
                             alert("Order mismatch");
                         if (status === 401)
                             alert("Unauthorized User");
+                        defer.resolve();
                         window.location = '#/';
                     });
 
@@ -41,17 +48,5 @@
                 footerBtnService.setRight('Print Labels', true);
                 footerBtnService.setMiddle('', false);
             }
-
-            //$scope.scanCode = function () {
-            //    cordovaReady(window.cordova.plugins.barcodeScanner.scan(
-            //        function (result) {
-            //            $scope.userId = result.text;
-            //            window.location = '#/order/' + result.text;
-            //        },
-            //        function (error) {
-            //            alert("Scanning failed: " + error);
-            //        }
-            //    ));
-            //}
         }
     ]);

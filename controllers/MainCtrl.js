@@ -13,20 +13,6 @@
             };
 
             $scope.init = function () {
-                //$http.post(window.apiUrl + 'UserLogon', $scope.registration).then(function(response) {
-                //    alert('Hello');
-                //});
-                //var User = $resource(window.apiUrl + 'UserLogon');
-                //User.get({ id: 'userCode', pin: 'pinCode' }, function (response) {
-                //    //$scope.user = response;
-                //    //dataIdService.setIDs(userCode, '', response.Token);
-                //    //$rootScope.oauth.access_token = response.Token;
-                //}, function (err) {
-                //    if (err.statusText === 'Not Found') {
-                //        alert("User is not found or pincode is wrong");
-                //    }
-                //    //window.location = '#/';
-                //});
             }
 
             $scope.passDots = '*';
@@ -91,6 +77,7 @@
                         $scope.openModal();
                         defer.promise.then(function (pinCode) {
                             window.location = '#/user/' + result.text + '/pin/' + pinCode;
+                            window.plugins.spinnerDialog.show(null, "Getting Data", true);
                         });
                     },
                     function(error) {

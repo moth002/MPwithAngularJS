@@ -1,8 +1,14 @@
 ﻿angular.module('myApp')
     .controller("UserCtrl", [
-        '$scope', '$http', '$routeParams', 'footerBtnService', 'cordovaReady', 'dataIdService',
-        function ($scope, $http, $routeParams, footerBtnService, cordovaReady, dataIdService) {
+        '$scope', '$http', '$routeParams', 'footerBtnService', 'cordovaReady', 'dataIdService', '$q',
+        function ($scope, $http, $routeParams, footerBtnService, cordovaReady, dataIdService, $q) {
             $scope.init = function () {
+                var defer = $q.defer();
+
+                defer.promise.then(function() {
+                    cordovaReady(window.plugins.spinnerDialog.hide());
+                });
+
                 var userModel = {
                     barcode: $routeParams.usercode,
                     pincode: $routeParams.pincode
@@ -14,6 +20,7 @@
                     .success(function(response) {
                         $scope.user = response;
                         dataIdService.setIDs(userCode, '', response.Token);
+                        defer.resolve();
                     })
                     .error(function(err, status) {
                         if (status === 404){
@@ -21,20 +28,9 @@
                         } else {
                             alert(err.Message);
                         }
+                        defer.resolve();
                         window.location = '#/';
                     });
-
-                //var User = $resource(window.apiUrl + 'GetUserAuthentication/:id');
-                //User.get({ id: userCode, pin: pinCode }, function (response) {
-                //    $scope.user = response;
-                //    dataIdService.setIDs(userCode, '', response.Token);
-                //    //$rootScope.oauth.access_token = response.Token;
-                //}, function (err) {
-                //    if (err.statusText === 'Not Found') {
-                //        alert("User is not found or pincode is wrong");
-                //    }
-                //    window.location = '#/';
-                //});
 
                 $scope.model = {
                     message: "Scan the patient's wristband or enter the NHI"
@@ -49,6 +45,7 @@
                     function (result) {
                         $scope.patientId = result.text;
                         window.location = '#/patient/' + result.text;
+                        window.plugins.spinnerDialog.show(null, "Getting Data", true);
                     },
                     function (error) {
                         alert("Scanning failed: " + error);
