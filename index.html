@@ -29,6 +29,7 @@
     <script src="services/FooterBtnService.js"></script>
     <script src="services/DataIDs.js"></script>
     <script src="controllers/FooterBtnCtrl.js"></script>
+    <script src="controllers/HeaderBtnCtrl.js"></script>
     <script src="controllers/MainCtrl.js"></script>
     <script src="controllers/UserCtrl.js"></script>
     <script src="controllers/PatientCtrl.js"></script>
@@ -36,25 +37,38 @@
 
 </head>
 <body>
+    <ion-side-menus>
+        <ion-side-menu-content>
+            <ion-header-bar class="bar-eclair" ng-controller="HeaderBtnCtrl">
+                <button class="button button-icon icon ion-navicon" ng-click="btnSideMenu()"></button>
+                <h1 class="title">
+                    <img class="title-image" src="./Content/images/header_logo.png" width="165" height="39"/>
+                </h1>
+                <!--<button class="button button-icon icon ion-arrow-left-a" ng-click="btnGoBack()"></button>-->
+            </ion-header-bar>
+            <ion-content padding="false" class="scroll-content ionic-scroll has-header has-footer">
+                <!--<div class="eclair-mobile-frame">-->
+                <div ng-view></div>
+                <!--</div>-->
+            </ion-content>
 
-    <ion-header-bar class="bar-eclair">
-        <button class="button button-icon icon ion-navicon"></button>
-        <h1 class="title"><img class="title-image" src="./Content/images/header_logo.png" width="165" height="39"/></h1>
-    </ion-header-bar>
-
-    <ion-content padding="false" class="scroll-content ionic-scroll has-header has-footer">
-        <!--<div class="eclair-mobile-frame">-->
-        <div ng-view></div>
-        <!--</div>-->
-    </ion-content>
-
-    <ion-footer-bar class="bar-stable" ng-controller="FooterBtnCtrl">
-        <div class="button-bar">
-            <button class="button button-footer icon-left ion-close-round" ng-click="btnCancel()">Cancel</button>
-            <button class="button button-footer" ng-show="middleButton.show" ng-click="openModal()">{{middleButton.title}}</button>
-            <button class="button button-footer icon-right ion-arrow-right-a" ng-show="rightButton.show" ng-click="buttonClicked()">{{rightButton.title}}</button>
-        </div>
-    </ion-footer-bar>
+            <ion-footer-bar class="bar-stable" ng-controller="FooterBtnCtrl">
+                <div class="button-bar">
+                    <button class="button button-footer icon-left ion-close-round" ng-click="btnCancel()">Cancel</button>
+                    <button class="button button-footer" ng-show="middleButton.show" ng-click="openModal()">{{middleButton.title}}</button>
+                    <button class="button button-footer icon-right ion-arrow-right-a" ng-show="rightButton.show" ng-click="buttonClicked()">{{rightButton.title}}</button>
+                </div>
+            </ion-footer-bar>
+        </ion-side-menu-content>
+        <ion-side-menu side="left">
+            <ion-list>
+                <ion-item>Home</ion-item>
+            </ion-list>
+            <ion-list>
+                <ion-item>Bluetooth</ion-item>
+            </ion-list>
+        </ion-side-menu>
+    </ion-side-menus>
     
 </body>
 </html>

@@ -72,18 +72,21 @@
             });
 
             $scope.scanCode = function () {
-                cordovaReady(window.cordova.plugins.barcodeScanner.scan(
-                    function (result) {
-                        $scope.openModal();
-                        defer.promise.then(function (pinCode) {
-                            window.location = '#/user/' + result.text + '/pin/' + pinCode;
-                            window.plugins.spinnerDialog.show(null, "Getting Data", true);
-                        });
-                    },
-                    function(error) {
-                        alert("Scanning failed: " + error);
-                    }
-                ));
+
+                $scope.openModal();
+
+                //cordovaReady(window.cordova.plugins.barcodeScanner.scan(
+                //    function (result) {
+                //        $scope.openModal();
+                //        defer.promise.then(function (pinCode) {
+                //            window.location = '#/user/' + result.text + '/pin/' + pinCode;
+                //            window.plugins.spinnerDialog.show(null, "Getting Data", true);
+                //        });
+                //    },
+                //    function(error) {
+                //        alert("Scanning failed: " + error);
+                //    }
+                //));
             }
 
         }
