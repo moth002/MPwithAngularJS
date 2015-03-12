@@ -47,7 +47,9 @@
 
             $ionicModal.fromTemplateUrl('Pincode-modal.html', {
                 scope: $scope,
-                animation: 'slide-in-up'
+                animation: 'fade-in',
+                backdropClickToClose: false,
+                hardwareBackButtonClose : false
             }).then(function (modal) {
                 $scope.modal = modal;
             });

@@ -15,9 +15,6 @@
                 }
 
                 $scope.btnCancel = function () {
-
-
-
                     cordovaReady(navigator.notification.alert(
                        'You are the winner!',  // message
                        alertDismissed,         // callback
