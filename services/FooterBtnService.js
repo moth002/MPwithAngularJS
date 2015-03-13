@@ -2,27 +2,31 @@
     .factory('footerBtnService', function() {
         var rightButton = {
             title: 'Next',
-            show: false
+            isVisible: false,
+            click: ''
         };
         var middleButton = {
             title: 'Next',
-            show: false
+            isVisible: false,
+            click: ''
         };
 
         return {
             getRight: function() {
                 return rightButton;
             },
-            setRight: function(t, s) {
+            setRight: function(t, s, c) {
                 rightButton.title = t;
-                rightButton.show = s;
+                rightButton.isVisible = s;
+                rightButton.click = c;
             },
             getMiddle: function() {
                 return middleButton;
             },
-            setMiddle: function(t, s) {
+            setMiddle: function(t, s, c) {
                 middleButton.title = t;
-                middleButton.show = s;
+                middleButton.isVisible = s;
+                middleButton.click = c;
             }
         }
     });

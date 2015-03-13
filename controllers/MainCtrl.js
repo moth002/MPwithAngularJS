@@ -5,14 +5,9 @@
 
             var defer = $q.defer();
 
-            $scope.registration = {
-                token: "",
-                name: "",
-                pinCode: "4321",
-                barcode: "mo"
-            };
-
             $scope.init = function () {
+                footerBtnService.setRight('Next', true, '#/user/MO/pin/4321');
+                footerBtnService.setMiddle('', false, '');
             }
 
             $scope.passDots = '*';
@@ -22,9 +17,6 @@
             }
 
             $scope.idList = dataIdService.getIDs;
-
-            footerBtnService.setRight('Next', true);
-            //footerBtnService.setMiddle('Modal', true);
 
             $scope.initModal = function () {
                 $scope.passcode = "";
@@ -47,7 +39,6 @@
 
             $ionicModal.fromTemplateUrl('Pincode-modal.html', {
                 scope: $scope,
-                animation: 'fade-in',
                 backdropClickToClose: false,
                 hardwareBackButtonClose : false
             }).then(function (modal) {
@@ -74,21 +65,18 @@
             });
 
             $scope.scanCode = function () {
-
-                $scope.openModal();
-
-                //cordovaReady(window.cordova.plugins.barcodeScanner.scan(
-                //    function (result) {
-                //        $scope.openModal();
-                //        defer.promise.then(function (pinCode) {
-                //            window.location = '#/user/' + result.text + '/pin/' + pinCode;
-                //            window.plugins.spinnerDialog.show(null, "Getting Data", true);
-                //        });
-                //    },
-                //    function(error) {
-                //        alert("Scanning failed: " + error);
-                //    }
-                //));
+                cordovaReady(window.cordova.plugins.barcodeScanner.scan(
+                    function (result) {
+                        $scope.openModal();
+                        defer.promise.then(function (pinCode) {
+                            window.location = '#/user/' + result.text + '/pin/' + pinCode;
+                            window.plugins.spinnerDialog.show(null, "Getting Data", true);
+                        });
+                    },
+                    function(error) {
+                        alert("Scanning failed: " + error);
+                    }
+                ));
             }
 
         }

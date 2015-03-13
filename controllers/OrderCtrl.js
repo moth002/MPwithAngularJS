@@ -5,6 +5,9 @@
             $scope.init = function () {
                 var defer = $q.defer();
 
+                footerBtnService.setRight('Next', true, '#/order/1858');
+                footerBtnService.setMiddle('Print Labels', true, '');
+
                 defer.promise.then(function () {
                     cordovaReady(window.plugins.spinnerDialog.hide());
                 });
@@ -43,10 +46,6 @@
                 $http.get(window.apiUrl + 'GetUserData', { params: {id: $scope.idList.userId} }).success(function(result) {
                     $scope.user = result;
                 });
-
-
-                footerBtnService.setRight('Print Labels', true);
-                footerBtnService.setMiddle('', false);
             }
         }
     ]);

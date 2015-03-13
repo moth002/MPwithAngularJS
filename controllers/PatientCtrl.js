@@ -5,6 +5,9 @@
             $scope.init = function () {
                 var defer = $q.defer();
 
+                footerBtnService.setRight('Next', true, '#/order/1858');
+                footerBtnService.setMiddle('', false, '');
+
                 defer.promise.then(function () {
                     cordovaReady(window.plugins.spinnerDialog.hide());
                 });
@@ -13,14 +16,13 @@
                     nhi: $routeParams.barcode,
                     scheme: 'nhi'
                 }
-                var nhi = $routeParams.barcode;
 
                 $scope.idList = dataIdService.getIDs();
 
                 $http.post(window.apiUrl + 'GetPatientData', patientModel)
                     .success(function (response) {
                         $scope.patient = response;
-                        dataIdService.setIDs($scope.idList.userId, nhi, $scope.idList.tokenId);
+                        dataIdService.setIDs($scope.idList.userId, patientModel.nhi, $scope.idList.tokenId);
                         defer.resolve();
                     })
                     .error(function (err, status) {
@@ -39,9 +41,6 @@
                 $scope.model = {
                     message: "Scan the order form or enter the order number"
                 }
-
-                footerBtnService.setRight('Next', true);
-                footerBtnService.setMiddle('', false);
             }
 
             $scope.scanCode = function () {

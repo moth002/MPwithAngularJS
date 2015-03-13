@@ -5,9 +5,11 @@
 
                 $scope.idList = dataIdService.getIDs;
 
+                $scope.rightButton = footerBtnService.getRight();
+                $scope.middleButton = footerBtnService.getMiddle();
+
                 $scope.buttonClicked = function () {
-                    //window.location = '#/user/' + $scope.userId;
-                    window.location = '#/user/MO/pin/4321';
+                    window.location = $scope.rightButton.click;
                 };
 
                 function alertDismissed() {
@@ -23,8 +25,7 @@
                    ));
                     window.location = '#/';
                 };
-                $scope.rightButton = footerBtnService.getRight();
-                $scope.middleButton = footerBtnService.getMiddle();
+                
 
                 function success(devices) {
                     devices.forEach(function (device) {

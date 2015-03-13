@@ -5,6 +5,9 @@
             $scope.init = function () {
                 var defer = $q.defer();
 
+                footerBtnService.setRight('Next', true, '#/patient/I0I0039');
+                footerBtnService.setMiddle('', false, '');
+
                 defer.promise.then(function() {
                     cordovaReady(window.plugins.spinnerDialog.hide());
                 });
@@ -13,13 +16,11 @@
                     barcode: $routeParams.usercode,
                     pincode: $routeParams.pincode
                 }
-                var userCode = $routeParams.usercode;
-                var pinCode = $routeParams.pincode;
 
                 $http.post(window.apiUrl + 'UserLogon', userModel)
                     .success(function(response) {
                         $scope.user = response;
-                        dataIdService.setIDs(userCode, '', response.Token);
+                        dataIdService.setIDs(userModel.barcode, '', response.Token);
                         defer.resolve();
                     })
                     .error(function(err, status) {
@@ -35,9 +36,6 @@
                 $scope.model = {
                     message: "Scan the patient's wristband or enter the NHI"
                 }
-
-                footerBtnService.setRight('Next', true);
-                footerBtnService.setMiddle('', false);
             }
 
             $scope.scanCode = function () {
