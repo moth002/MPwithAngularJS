@@ -1,5 +1,5 @@
 ﻿angular.module('myApp')
-    .factory('cordovaReady', function () {
+    .factory('cordovaReadyService', function () {
         return function (fn) {
 
             var queue = [];

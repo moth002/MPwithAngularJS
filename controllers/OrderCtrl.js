@@ -1,7 +1,7 @@
 ﻿angular.module('myApp')
     .controller("OrderCtrl", [
-        '$scope', '$http', '$routeParams', 'footerBtnService', 'cordovaReady', 'dataIdService', '$q',
-        function ($scope, $http, $routeParams, footerBtnService, cordovaReady, dataIdService, $q) {
+        '$scope', '$http', '$routeParams', 'footerBtnService', 'cordovaReadyService', 'globalIdService', '$q',
+        function ($scope, $http, $routeParams, footerBtnService, cordovaReadyService, globalIdService, $q) {
             $scope.init = function () {
                 var defer = $q.defer();
 
@@ -9,10 +9,10 @@
                 footerBtnService.setMiddle('Print Labels', true, '');
 
                 defer.promise.then(function () {
-                    cordovaReady(window.plugins.spinnerDialog.hide());
+                    cordovaReadyService(window.plugins.spinnerDialog.hide());
                 });
 
-                $scope.idList = dataIdService.getIDs();
+                $scope.idList = globalIdService.getIDs();
 
                 var orderModel = {
                     orderId: $routeParams.orderId,
@@ -27,7 +27,7 @@
                 $http.post(window.apiUrl + 'GetOrderData', orderModel)
                     .success(function (response) {
                         $scope.order = response;
-                        dataIdService.setIDs($scope.idList.userId, $scope.idList.patientId, $scope.idList.tokenId);
+                        globalIdService.setIDs($scope.idList.userId, $scope.idList.patientId, $scope.idList.tokenId);
                         defer.resolve();
                     })
                     .error(function (err, status) {

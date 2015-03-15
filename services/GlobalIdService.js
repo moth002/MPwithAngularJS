@@ -1,19 +1,19 @@
 ﻿angular.module('myApp')
-    .factory('dataIdService', function () {
+    .factory('globalIdService', function () {
         var idList = {
             userId: '',
             patientId: '',
-            tokenId: ''
-        };
+            tokenId: '',
 
-        return {
             getIDs: function () {
                 return idList;
             },
-            setIDs: function (u, p, t) {              
+            setIDs: function (u, p, t) {
                 idList.userId = u;
                 idList.patientId = p;
                 idList.tokenId = t;
             }
-        }
-    });
+        };
+
+    return idList;
+});

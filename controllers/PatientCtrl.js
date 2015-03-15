@@ -1,7 +1,7 @@
 ﻿angular.module('myApp')
     .controller("PatientCtrl", [
-        '$scope', '$http', '$routeParams', 'footerBtnService', 'cordovaReady', 'dataIdService', '$q',
-        function ($scope, $http, $routeParams, footerBtnService, cordovaReady, dataIdService, $q) {
+        '$scope', '$http', '$routeParams', 'footerBtnService', 'cordovaReadyService', 'globalIdService', '$q',
+        function ($scope, $http, $routeParams, footerBtnService, cordovaReadyService, globalIdService, $q) {
             $scope.init = function () {
                 var defer = $q.defer();
 
@@ -9,7 +9,7 @@
                 footerBtnService.setMiddle('', false, '');
 
                 defer.promise.then(function () {
-                    cordovaReady(window.plugins.spinnerDialog.hide());
+                    cordovaReadyService(window.plugins.spinnerDialog.hide());
                 });
 
                 var patientModel = {
@@ -17,12 +17,12 @@
                     scheme: 'nhi'
                 }
 
-                $scope.idList = dataIdService.getIDs();
+                $scope.idList = globalIdService.getIDs();
 
                 $http.post(window.apiUrl + 'GetPatientData', patientModel)
                     .success(function (response) {
                         $scope.patient = response;
-                        dataIdService.setIDs($scope.idList.userId, patientModel.nhi, $scope.idList.tokenId);
+                        globalIdService.setIDs($scope.idList.userId, patientModel.nhi, $scope.idList.tokenId);
                         defer.resolve();
                     })
                     .error(function (err, status) {
@@ -44,7 +44,7 @@
             }
 
             $scope.scanCode = function () {
-                cordovaReady(window.cordova.plugins.barcodeScanner.scan(
+                cordovaReadyService(window.cordova.plugins.barcodeScanner.scan(
                     function (result) {
                         $scope.userId = result.text;
                         window.location = '#/order/' + result.text;

@@ -1,25 +1,25 @@
 ﻿angular.module("myApp", ['ionic', 'ngRoute', 'ngResource'])
 
-    .run(['$ionicPlatform', 'dataIdService', '$injector', function ($ionicPlatform, dataIdService, $injector) {
+    .run(['$ionicPlatform', 'globalIdService', '$injector', 'cordovaReadyService', function ($ionicPlatform, globalIdService, $injector, cordovaReadyService) {
         $ionicPlatform.ready(function () {
             // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
             // for form inputs)
             if (window.cordova && window.cordova.plugins.Keyboard) {
-                cordova.plugins.Keyboard.hideKeyboardAccessoryBar(true);
+                cordovaReadyService(cordova.plugins.Keyboard.hideKeyboardAccessoryBar(true));
             }
             if (window.StatusBar) {
                 // org.apache.cordova.statusbar required
-                StatusBar.styleDefault();
+                //StatusBar.styleDefault();
+                StatusBar.hide();
             }
             ionic.Platform.isFullScreen = true;
         });
 
         // Override the transform Request, $injector get the object
         $injector.get("$http").defaults.transformRequest = function (data, headersGetter) {
-            var idList = dataIdService.getIDs();
-            //if ($rootScope.oauth) // if there is a token
+            var idList = globalIdService.getIDs();
             headersGetter()['Authorization'] = idList.tokenId;
-            if (data) // original or base transformation
+            if (data) // original or base transformRequest
                 return angular.toJson(data);
         };
     }])

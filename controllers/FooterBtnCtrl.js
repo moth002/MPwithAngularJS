@@ -1,9 +1,9 @@
 ﻿angular.module('myApp')
     .controller("FooterBtnCtrl", [
-        '$scope', 'footerBtnService', 'dataIdService', 'cordovaReady',
-            function ($scope, footerBtnService, dataIdService, cordovaReady) {
+        '$scope', 'footerBtnService', 'globalIdService', 'cordovaReadyService',
+            function ($scope, footerBtnService, globalIdService, cordovaReadyService) {
 
-                $scope.idList = dataIdService.getIDs;
+                $scope.idList = globalIdService.getIDs;
 
                 $scope.rightButton = footerBtnService.getRight();
                 $scope.middleButton = footerBtnService.getMiddle();
@@ -17,7 +17,7 @@
                 }
 
                 $scope.btnCancel = function () {
-                    cordovaReady(navigator.notification.alert(
+                    cordovaReadyService(navigator.notification.alert(
                        'You are the winner!',  // message
                        alertDismissed,         // callback
                        'Game Over',            // title
@@ -38,7 +38,7 @@
                 };
 
                 //$scope.btnCancel = function () {
-                //    cordovaReady( bluetoothSerial.list(success, failure));
+                //    cordovaReadyService( bluetoothSerial.list(success, failure));
                 //};
 
 

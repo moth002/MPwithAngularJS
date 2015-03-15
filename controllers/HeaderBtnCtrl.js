@@ -1,7 +1,7 @@
 ﻿angular.module('myApp')
     .controller("HeaderBtnCtrl", [
-        '$scope', '$rootScope', '$ionicSideMenuDelegate', 'cordovaReady',
-            function ($scope, $rootScope, $ionicSideMenuDelegate, cordovaReady) {
+        '$scope', '$rootScope', '$ionicSideMenuDelegate', 'cordovaReadyService',
+            function ($scope, $rootScope, $ionicSideMenuDelegate, cordovaReadyService) {
 
                 $scope.btnSideMenu = function () {
                     $ionicSideMenuDelegate.toggleLeft();

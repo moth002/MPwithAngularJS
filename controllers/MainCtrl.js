@@ -1,7 +1,7 @@
 ﻿angular.module('myApp')
     .controller("MainCtrl", [
-        '$scope', '$http', 'cordovaReady', 'footerBtnService', 'dataIdService', '$ionicModal', '$q',
-        function ($scope, $http, cordovaReady, footerBtnService, dataIdService, $ionicModal, $q) {
+        '$scope', '$http', 'cordovaReadyService', 'footerBtnService', 'globalIdService', '$ionicModal', '$q',
+        function ($scope, $http, cordovaReadyService, footerBtnService, globalIdService, $ionicModal, $q) {
 
             var defer = $q.defer();
 
@@ -16,7 +16,7 @@
                 message: "Scan or enter your ID"
             }
 
-            $scope.idList = dataIdService.getIDs;
+            $scope.idList = globalIdService.getIDs;
 
             $scope.initModal = function () {
                 $scope.passcode = "";
@@ -65,7 +65,7 @@
             });
 
             $scope.scanCode = function () {
-                cordovaReady(window.cordova.plugins.barcodeScanner.scan(
+                cordovaReadyService(window.cordova.plugins.barcodeScanner.scan(
                     function (result) {
                         $scope.openModal();
                         defer.promise.then(function (pinCode) {
