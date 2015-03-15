@@ -59,17 +59,17 @@
                 </div>
             </ion-footer-bar>
         </ion-side-menu-content>
-        <ion-side-menu class="sideMenu" side="left">
+        <ion-side-menu class="sideMenu" side="left" ng-controller="SideMenuBtnCtrl">
             <div class="item item-divider">
                 Device status
                 <span class="item-note" style="color: green">online</span>
             </div>
             <div class="list">
-                <div class="item" style="color: #b2b2b2">
+                <div class="item" style="color: #b2b2b2" ng-click="btnHome()">
                     <i class="icon ion-home"></i>
                     <span style="padding-left: 10px;">Home</span>
                 </div>
-                <div class="item" style="color: #b2b2b2">
+                <div class="item" style="color: #b2b2b2" ng-click="btnBluetooth()">
                     <i class="icon ion-bluetooth"></i>
                     <span style="padding-left: 10px;">Bluetooth</span>
                 </div>
