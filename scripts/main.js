@@ -9,12 +9,10 @@
             }
             if (window.StatusBar) {
                 // org.apache.cordova.statusbar required
-                //StatusBar.styleDefault();
-                cordovaReadyService(StatusBar.hide());
+                cordovaReadyService(window.StatusBar.styleDefault());
+                //cordovaReadyService(StatusBar.hide());
             }
             ionic.Platform.isFullScreen = true;
-
-            cordovaReadyService(window.plugin.statusbarOverlay.hide());
         });
 
         // Override the transform Request, $injector get the object
