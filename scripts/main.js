@@ -13,7 +13,7 @@
                 cordovaReadyService(window.StatusBar.backgroundColorByName("white"));
                 cordovaReadyService(window.StatusBar.overlaysWebView(true));
             }
-            ionic.Platform.isFullScreen = true;
+            ionic.Platform.isFullScreen = false;
         });
 
         // Override the transform Request, $injector get the object
