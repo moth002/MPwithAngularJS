@@ -10,9 +10,14 @@
 
                 $scope.btnBluetooth = function () {
                     cordovaReadyService(bluetoothSerial.list(function (devices) {
-                        devices.forEach(function(device) {
-                            alert(device.name);
-                        });
+                        if (devices != null) {
+                            devices.forEach(function (device) {
+                                alert(device.name);
+                            });
+                        } else {
+                            alert("");
+                        }
+                        
                     }, function(reason) {
                         alert(reason);
                     }));

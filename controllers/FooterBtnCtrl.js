@@ -1,12 +1,13 @@
 ﻿angular.module('myApp')
     .controller("FooterBtnCtrl", [
-        '$scope', 'footerBtnService', 'globalIdService', 'cordovaReadyService',
-            function ($scope, footerBtnService, globalIdService, cordovaReadyService) {
+        '$scope', 'footerBtnService', 'globalIdService', 'cordovaReadyService', 'notificationDlgService',
+            function ($scope, footerBtnService, globalIdService, cordovaReadyService, notificationDlgService) {
 
                 $scope.idList = globalIdService.getIDs;
 
                 $scope.rightButton = footerBtnService.getRight();
                 $scope.middleButton = footerBtnService.getMiddle();
+                $scope.leftButton = footerBtnService.getLeft();
 
                 $scope.buttonClicked = function () {
                     window.location = $scope.rightButton.click;
@@ -17,12 +18,12 @@
                 }
 
                 $scope.btnCancel = function () {
-                    cordovaReadyService(navigator.notification.alert(
-                       'You are the winner!',  // message
-                       alertDismissed,         // callback
-                       'Game Over',            // title
-                       'Done'                  // buttonName
-                   ));
+                   // cordovaReadyService(navigator.notification.alert(
+                   //    'You are the winner!',  // message
+                   //    alertDismissed,         // callback
+                   //    'Game Over',            // title
+                   //    'Done'                  // buttonName
+                    //));
                     window.location = '#/';
                 };
                 

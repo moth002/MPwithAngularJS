@@ -13,6 +13,8 @@
                 cordovaReadyService(StatusBar.hide());
             }
             ionic.Platform.isFullScreen = true;
+
+            cordovaReadyService(window.plugin.statusbarOverlay.hide());
         });
 
         // Override the transform Request, $injector get the object

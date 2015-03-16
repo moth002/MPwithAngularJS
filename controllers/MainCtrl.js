@@ -8,6 +8,7 @@
             $scope.init = function () {
                 footerBtnService.setRight('Next', true, '#/user/MO/pin/4321');
                 footerBtnService.setMiddle('', false, '');
+                footerBtnService.setLeft(false);
             }
 
             $scope.passDots = '*';

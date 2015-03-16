@@ -10,23 +10,34 @@
             isVisible: false,
             click: ''
         };
+        var leftButton = {
+            title: 'Next',
+            isVisible: false,
+            click: ''
+        };
 
         return {
             getRight: function() {
                 return rightButton;
             },
-            setRight: function(t, s, c) {
+            setRight: function(t, v, c) {
                 rightButton.title = t;
-                rightButton.isVisible = s;
+                rightButton.isVisible = v;
                 rightButton.click = c;
             },
             getMiddle: function() {
                 return middleButton;
             },
-            setMiddle: function(t, s, c) {
+            setMiddle: function(t, v, c) {
                 middleButton.title = t;
-                middleButton.isVisible = s;
+                middleButton.isVisible = v;
                 middleButton.click = c;
+            },
+            getLeft: function () {
+                return leftButton;
+            },
+            setLeft: function(v) {
+                leftButton.isVisible = v;
             }
         }
     });
