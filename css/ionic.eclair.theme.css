@@ -5,6 +5,17 @@
     padding-top: 22px;
 }.menu.sideMenu .item {
     padding: 8px 16px;
+}.menu.sideMenu .toggle {
+       top: 5px;
+}.menu.sideMenu input:checked + .track {
+     border-color: #b6d55f;
+     background-color: #b6d55f;
+}.menu.sideMenu .track {
+     width: 45px;
+     height: 25px;
+}.menu.sideMenu .handle {
+     width: 20px;
+     height: 20px;
 }
 
 .bar.bar-eclair {

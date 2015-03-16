@@ -10,7 +10,6 @@
     <link href="Content/ionic.css" rel="stylesheet" />
     <link href="css/index.css" rel="stylesheet" />
     <link href="css/ionic.eclair.theme.css" rel="stylesheet" />
-    <!--<link rel="stylesheet" href="Content/jquery.mobile.eclair.theme.css"/>-->
 
     <script src="scripts/ionic.bundle.js"></script>
     <script src="scripts/angular.min.js"></script>
@@ -62,8 +61,15 @@
         </ion-side-menu-content>
         <ion-side-menu class="sideMenu" side="left" ng-controller="SideMenuBtnCtrl">
             <div class="item item-divider">
-                Device status
-                <span class="item-note" style="color: green">online</span>
+                <div class="item item-toggle">
+                    Device active
+                    <label class="toggle-eclair toggle">
+                        <input type="checkbox" ng-model="ctlDeviceActive.value" ng-change="deviceActiveChanged()">
+                        <div class="track">
+                            <div class="handle"></div>
+                        </div>
+                    </label>
+                </div>
             </div>
             <div class="list">
                 <div class="item" style="color: #b2b2b2" ng-click="btnHome()">
