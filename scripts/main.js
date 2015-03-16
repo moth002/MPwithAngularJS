@@ -11,6 +11,7 @@
                 // org.apache.cordova.statusbar required
                 cordovaReadyService(window.StatusBar.styleDefault());
                 cordovaReadyService(window.StatusBar.backgroundColorByName("white"));
+                cordovaReadyService(window.StatusBar.overlaysWebView(false));
             }
             ionic.Platform.isFullScreen = true;
         });
