@@ -15,5 +15,4 @@
   <gap:plugin name="hu.dpal.phonegap.plugins.spinnerdialog" version="1.2.0" />
   <gap:plugin name="com.phonegap.plugin.statusbar" version="1.1.0" />
   <preference name="SplashScreen" value="screen" />
-  <preference name="StatusBarBackgroundColor" value="#444444" />
 </widget>
