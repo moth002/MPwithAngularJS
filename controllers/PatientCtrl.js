@@ -6,7 +6,7 @@
                 var defer = $q.defer();
 
                 footerBtnService.setRight('Next', true, '#/order/1858');
-                footerBtnService.setMiddle('', false, '');
+                footerBtnService.setMiddle('', false);
                 footerBtnService.setLeft(true);
 
                 defer.promise.then(function () {

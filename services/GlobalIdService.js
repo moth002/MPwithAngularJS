@@ -4,6 +4,7 @@
             userId: '',
             patientId: '',
             tokenId: '',
+            printerId: '',
 
             getIDs: function () {
                 return idList;
@@ -12,6 +13,9 @@
                 idList.userId = u;
                 idList.patientId = p;
                 idList.tokenId = t;
+            },
+            setPrinter: function(p) {
+                idList.printerId = p;
             }
         };
 

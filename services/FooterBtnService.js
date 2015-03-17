@@ -8,7 +8,7 @@
         var middleButton = {
             title: 'Next',
             isVisible: false,
-            click: ''
+            click: null
         };
         var leftButton = {
             title: 'Next',

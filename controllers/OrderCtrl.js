@@ -1,13 +1,9 @@
 ﻿angular.module('myApp')
     .controller("OrderCtrl", [
-        '$scope', '$http', '$routeParams', 'footerBtnService', 'cordovaReadyService', 'globalIdService', '$q',
-        function ($scope, $http, $routeParams, footerBtnService, cordovaReadyService, globalIdService, $q) {
+        '$scope', '$http', '$routeParams', 'footerBtnService', 'cordovaReadyService', 'globalIdService', '$q', 'labelPrintService',
+        function ($scope, $http, $routeParams, footerBtnService, cordovaReadyService, globalIdService, $q, labelPrintService) {
             $scope.init = function () {
                 var defer = $q.defer();
-
-                footerBtnService.setRight('Next', true, '#/order/1858');
-                footerBtnService.setMiddle('Print Labels', true, '');
-                footerBtnService.setLeft(true);
 
                 defer.promise.then(function () {
                     cordovaReadyService(window.plugins.spinnerDialog.hide());
@@ -47,6 +43,19 @@
                 $http.get(window.apiUrl + 'GetUserData', { params: {id: $scope.idList.userId} }).success(function(result) {
                     $scope.user = result;
                 });
+
+                var setMiddleClick = function() {
+
+                    $scope.order.Specimens.forEach(function(spec) {
+                        labelPrintService.print($scope.patient.Name + " "
+                        + $scope.patient.NHI, $scope.patient.Gender + " "
+                        + $scope.patient.DOB + "   " + spec.split(',', 1), 'DB0010H001');
+                    });
+                };
+
+                footerBtnService.setRight('Next', true, '#/order/1858');
+                footerBtnService.setMiddle('Print Labels', true, setMiddleClick);
+                footerBtnService.setLeft(true);
             }
         }
     ]);

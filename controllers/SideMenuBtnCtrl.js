@@ -1,7 +1,7 @@
 ﻿angular.module('myApp')
     .controller("SideMenuBtnCtrl", [
-        '$scope', 'cordovaReadyService', '$ionicSideMenuDelegate',
-            function ($scope, cordovaReadyService, $ionicSideMenuDelegate) {
+        '$scope', 'cordovaReadyService', '$ionicSideMenuDelegate', 'globalIdService',
+            function ($scope, cordovaReadyService, $ionicSideMenuDelegate, globalIdService) {
 
                 $scope.ctlDeviceActive = {
                     value: true
@@ -23,10 +23,15 @@
                 };
 
                 $scope.btnBluetooth = function () {
-                    cordovaReadyService(bluetoothSerial.list(function (devices) {
+                    cordovaReadyService(window.bluetoothSerial.list(function (devices) {
                         if (devices != null) {
                             devices.forEach(function (device) {
                                 alert(device.name);
+                                // --------------------------------------------------------
+                                // this should be refactored
+                                globalIdService.setPrinter(device.id);
+                                // --------------------------------------------------------
+                                //labelPrintService.print(device.id);
                             });
                         } else {
                             alert("");
@@ -35,6 +40,7 @@
                     }, function(reason) {
                         alert(reason);
                     }));
+                    
                 };
 
             }
