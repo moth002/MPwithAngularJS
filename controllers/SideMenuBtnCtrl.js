@@ -35,7 +35,7 @@
 
                     setTimeout(function () { // oddly the timer is needed to ensure all services are available.
                         cordovaReadyService(window.bluetoothSerial.list($scope.getList, $scope.falure));
-                    }, 500);
+                    }, 5000);
 
 
                 }
