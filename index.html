@@ -77,10 +77,13 @@
                     <i class="icon ion-home"></i>
                     <span style="padding-left: 10px;">Home</span>
                 </div>
-                <div class="item" style="color: #b2b2b2" ng-click="btnBluetooth()">
+                <label class="item item-input item-select" style="color: #b2b2b2" ng-click="btnBluetooth()" ng-init="init()">
                     <i class="icon ion-bluetooth"></i>
-                    <span style="padding-left: 10px;">Bluetooth</span>
-                </div>
+                    <span style="padding-left: 10px;">
+                        {{bluetooth}}
+                    </span>
+                    <select class="select" ng-model="selectedPrinter" ng-options="printer.name for printer in printerOptions"></select>
+                </label>
             </div>
         </ion-side-menu>
     </ion-side-menus>

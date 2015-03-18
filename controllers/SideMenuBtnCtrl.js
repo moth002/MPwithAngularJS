@@ -3,6 +3,43 @@
         '$scope', 'cordovaReadyService', '$ionicSideMenuDelegate', 'globalIdService',
             function ($scope, cordovaReadyService, $ionicSideMenuDelegate, globalIdService) {
 
+                $scope.init = function () {
+
+                    //////// ------------------------
+                    //////// Think of placing a spinner untill the timer is done below
+                    //////// ------------------------
+
+                    $scope.getList = function (devices) {
+                        if (devices.length !== 0) {
+                            $scope.bluetooth = 'Printers';
+
+                            $scope.printerOptions = [];
+
+                            devices.forEach(function (device) {
+                                $scope.printerOptions.push({name: device.name, id: device.id});
+                            });
+
+                            $scope.printerOptions.sort();
+                            $scope.selectedPrinter = $scope.printerOptions[0];
+                            globalIdService.setPrinter($scope.printerOptions[0].id);
+
+                        } else {
+                            $scope.bluetooth = 'Please pair a printer';
+                        }
+
+                    };
+
+                    $scope.failure = function (reason) {
+                        alert('Unable to list printers: ' + reason);
+                    }
+
+                    setTimeout(function () { // oddly the timer is needed to ensure all services are available.
+                        cordovaReadyService(window.bluetoothSerial.list($scope.getList, $scope.falure));
+                    }, 500);
+
+
+                }
+
                 $scope.ctlDeviceActive = {
                     value: true
                 }
@@ -23,24 +60,6 @@
                 };
 
                 $scope.btnBluetooth = function () {
-                    cordovaReadyService(window.bluetoothSerial.list(function (devices) {
-                        if (devices != null) {
-                            devices.forEach(function (device) {
-                                alert(device.name);
-                                // --------------------------------------------------------
-                                // this should be refactored
-                                globalIdService.setPrinter(device.id);
-                                // --------------------------------------------------------
-                                //labelPrintService.print(device.id);
-                            });
-                        } else {
-                            alert("");
-                        }
-                        
-                    }, function(reason) {
-                        alert(reason);
-                    }));
-                    
                 };
 
             }
