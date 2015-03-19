@@ -16,6 +16,9 @@
             },
             setPrinter: function(p) {
                 idList.printerId = p;
+            },
+            isPrinterPaired: function () {
+                return idList.printerId !== '';
             }
         };
 

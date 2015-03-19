@@ -45,15 +45,20 @@
                 });
 
                 var setMiddleClick = function() {
-
-                    $scope.order.Specimens.forEach(function(spec) {
+                /////// ------------------------
+                /// This is not correct (if there is a problem with printing) the error will be reported n number of times
+                /// need to pass the information then check if the connection is possible, only then print the n number of lables. 
+                /////// ------------------------
+                    for (var i = 0; i < $scope.order.Specimens.length; i++) {
                         labelPrintService.print($scope.patient.Name + " "
                         + $scope.patient.NHI, $scope.patient.Gender + " "
-                        + $scope.patient.DOB + "   " + spec.split(',', 1), 'DB0010H001');
-                    });
+                        + $scope.patient.DOB + "  "
+                        + $scope.order.Specimens[i].split(',', 1),
+                        $scope.order.Barcodes[i]);
+                    }              
                 };
 
-                footerBtnService.setRight('Next', true, '#/order/1858');
+                footerBtnService.setRight('Collect', true, '#/collect/');
                 footerBtnService.setMiddle('Print Labels', true, setMiddleClick);
                 footerBtnService.setLeft(true);
             }

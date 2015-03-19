@@ -26,6 +26,7 @@
                 var idList = globalIdService.getIDs();
                 var printer = idList.printerId;
 
+                cordovaReadyService(window.plugins.toast.showShortCenter("\n Connecting to printer \n", success, failure));
                 cordovaReadyService(window.bluetoothSerial.connect(printer, success, failure));
 
                 var str = "^XA^DFR:FA.ZPL^FS^FO53,96^LL240^BY2^BCN,77,Y,N^FN1^FS^FT39,200^CI0^FT77,40^A0N,28,39^FD$msg$".replace("$msg$", msg1);
@@ -34,7 +35,8 @@
 
                 try
                 {
-                    setTimeout(function() {
+                    setTimeout(function () {
+                        cordovaReadyService(window.plugins.toast.showShortCenter("\n Printing .... \n", success, failure));
                         cordovaReadyService(window.bluetoothSerial.write(str, success, failure));
                         cordovaReadyService(window.bluetoothSerial.disconnect(success, failure));
                         return true;

@@ -1,5 +1,5 @@
 ﻿angular.module('myApp')
-    .factory('footerBtnService', function() {
+    .factory('footerBtnService', ['globalIdService', function (globalIdService) {
         var rightButton = {
             title: 'Next',
             isVisible: false,
@@ -30,7 +30,7 @@
             },
             setMiddle: function(t, v, c) {
                 middleButton.title = t;
-                middleButton.isVisible = v;
+                middleButton.isVisible = v && globalIdService.isPrinterPaired() ? true : false ;
                 middleButton.click = c;
             },
             getLeft: function () {
@@ -40,4 +40,4 @@
                 leftButton.isVisible = v;
             }
         }
-    });
+    }]);
