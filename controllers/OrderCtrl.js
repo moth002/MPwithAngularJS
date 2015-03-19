@@ -24,7 +24,7 @@
                 $http.post(window.apiUrl + 'GetOrderData', orderModel)
                     .success(function (response) {
                         $scope.order = response;
-                        globalIdService.setIDs($scope.idList.userId, $scope.idList.patientId, $scope.idList.tokenId);
+                        globalIdService.setIDs($scope.idList.userId, $scope.idList.patientId, orderModel.orderId, $scope.idList.tokenId);
                         defer.resolve();
                     })
                     .error(function (err, status) {
@@ -58,7 +58,7 @@
                     }              
                 };
 
-                footerBtnService.setRight('Collect', true, '#/collect/');
+                footerBtnService.setRight('Collect', true, '#/collect');
                 footerBtnService.setMiddle('Print Labels', true, setMiddleClick);
                 footerBtnService.setLeft(true);
             }

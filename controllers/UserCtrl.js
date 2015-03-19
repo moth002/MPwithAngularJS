@@ -6,7 +6,7 @@
                 var defer = $q.defer();
 
                 footerBtnService.setRight('Next', true, '#/patient/I0I0039');
-                footerBtnService.setMiddle('', false);
+                footerBtnService.setMiddle('', false, null);
                 footerBtnService.setLeft(true);
 
                 defer.promise.then(function() {
@@ -21,7 +21,7 @@
                 $http.post(window.apiUrl + 'UserLogon', userModel)
                     .success(function(response) {
                         $scope.user = response;
-                        globalIdService.setIDs(userModel.barcode, '', response.Token);
+                        globalIdService.setIDs(userModel.barcode, '', '', response.Token);
                         defer.resolve();
                     })
                     .error(function(err, status) {

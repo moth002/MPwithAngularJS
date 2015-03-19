@@ -42,10 +42,16 @@
             templateUrl: "views/order.html",
             controller: "OrderCtrl"
         })
+        .when("/collect", {
+            templateUrl: "views/collect.html",
+            controller: "CollectCtrl"
+        })
         .otherwise({
             redirectTo: '/'
         });
-    }])
+
+
+}])
 
 
 
