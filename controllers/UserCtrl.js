@@ -5,7 +5,9 @@
             $scope.init = function () {
                 var defer = $q.defer();
 
-                footerBtnService.setRight('Next', true, '#/patient/I0I0039');
+                var rightButtonClick = function () { window.location = '#/patient/I0I0039' };
+
+                footerBtnService.setRight('Next', true, rightButtonClick);
                 footerBtnService.setMiddle('', false, null);
                 footerBtnService.setLeft(true);
 

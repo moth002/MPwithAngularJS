@@ -58,7 +58,9 @@
                     }              
                 };
 
-                footerBtnService.setRight('Collect', true, '#/collect');
+                var rightButtonClick = function () { window.location = '#/collect' };
+
+                footerBtnService.setRight('Next', true, rightButtonClick);
                 footerBtnService.setMiddle('Print Labels', true, setMiddleClick);
                 footerBtnService.setLeft(true);
             }

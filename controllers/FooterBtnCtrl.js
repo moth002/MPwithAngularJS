@@ -9,11 +9,11 @@
                 $scope.middleButton = footerBtnService.getMiddle();
                 $scope.leftButton = footerBtnService.getLeft();
 
-                $scope.buttonClicked = function () {
-                    window.location = $scope.rightButton.click;
+                $scope.btnRight = function () {
+                    $scope.rightButton.click();
                 };
 
-                $scope.btnCancel = function () {
+                $scope.btnLeft = function () {
                    // cordovaReadyService(navigator.notification.alert(
                    //    'You are the winner!',  // message
                    //    alertDismissed,         // callback

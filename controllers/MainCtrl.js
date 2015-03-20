@@ -6,7 +6,10 @@
             var defer = $q.defer();
 
             $scope.init = function () {
-                footerBtnService.setRight('Next', true, '#/user/MO/pin/4321');
+
+                var rightButtonClick = function () { window.location = '#/user/MO/pin/4321' };
+
+                footerBtnService.setRight('Next', true, rightButtonClick);
                 footerBtnService.setMiddle('', false, null);
                 footerBtnService.setLeft(false);
             }

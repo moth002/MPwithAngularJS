@@ -3,7 +3,7 @@
         var rightButton = {
             title: 'Next',
             isVisible: false,
-            click: ''
+            click: null
         };
         var middleButton = {
             title: 'Next',
@@ -13,7 +13,7 @@
         var leftButton = {
             title: 'Next',
             isVisible: false,
-            click: ''
+            click: null
         };
 
         return {
