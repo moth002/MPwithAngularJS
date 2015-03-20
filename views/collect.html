@@ -18,27 +18,22 @@
     </div>
 </div>
 <div class="c3">
+    <div class="welcome-message">{{model.message}}</div>
+    <div class="card" style="margin: 0">
+        <div class="list" style="margin-bottom: 10px;">
+            <!--<ion-checkbox class="checkbox checkbox-eclair" ng-model="isChecked">Checkbox Label</ion-checkbox>-->
+            <div class="item item-checkbox" ng-repeat="item in model.chkboxSpecimens">
+                <label class="checkbox checkbox-eclair">
+                    <input type="checkbox" ng-checked="item.checked" disabled="disabled">
+                </label>
+                {{ item.name }}
+            </div>
+        </div>
+        <button class="button button-block button-footer" style="margin: 0;" ng-click="scanCode()">Scan</button>
+    </div>
+    <label class="item item-input">
+        <span class="input-label">Date</span>
+        <input type="date">
+    </label>
 
-    <ul class="list">
-
-        <li class="item item-checkbox">
-            <label class="checkbox">
-                <input type="checkbox">
-            </label>
-            Flux Capacitor
-        </li>
-        <li class="item item-checkbox">
-            <label class="checkbox">
-                <input type="checkbox">
-            </label>
-            Flux Capacitor
-        </li>
-        <li class="item item-checkbox">
-            <label class="checkbox">
-                <input type="checkbox">
-            </label>
-            Flux Capacitor
-        </li>
-
-    </ul>
 </div>

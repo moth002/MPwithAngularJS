@@ -21,6 +21,11 @@
      font-size: 10px;
  }
 
+.checkbox.checkbox-eclair input:before, .checkbox.checkbox-eclair .checkbox-icon:before {
+  border-color: #b6d55f; }
+.checkbox.checkbox-eclair input:checked:before, .checkbox.checkbox-eclair input:checked + .checkbox-icon:before {
+  background: #00b1e8; }
+
 .bar.bar-eclair {
     background-size: 100%; 
     background-image: linear-gradient(#00b1e8, #0066b3);

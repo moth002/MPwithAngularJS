@@ -5,8 +5,17 @@
             $scope.init = function () {
                 var defer = $q.defer();
 
+                $scope.model = {
+                    message: "Scan the collected and labelled samples",
+                    chkboxSpecimens: []
+                }
+
                 defer.promise.then(function () {
                     cordovaReadyService(window.plugins.spinnerDialog.hide());
+
+                    for (var i = 0; i < $scope.order.Specimens.length; i++) {
+                        $scope.model.chkboxSpecimens.push({ name: $scope.order.Specimens[i], code: $scope.order.Barcodes[i], checked: '' });
+                    }
                 });
 
                 $scope.idList = globalIdService.getIDs();
@@ -44,22 +53,25 @@
                     $scope.user = result;
                 });
 
-                $scope.scanCode = function () {
-                    cordovaReadyService(window.cordova.plugins.barcodeScanner.scan(
-                        function (result) {
-                            $scope.patientId = result.text;
-                            window.location = '#/patient/' + result.text;
-                            window.plugins.spinnerDialog.show(null, "Getting Data", true);
-                        },
-                        function (error) {
-                            alert("Scanning failed: " + error);
-                        }
-                    ));
-                }
-
-                footerBtnService.setRight('Complete', true, '#/collect');
+                footerBtnService.setRight('Next', true, '#/');
                 footerBtnService.setMiddle('', false, null);
                 footerBtnService.setLeft(true);
+            }
+
+            $scope.scanCode = function () {
+                cordovaReadyService(window.cordova.plugins.barcodeScanner.scan(
+                    function (result) {
+                        $scope.model.chkboxSpecimens.forEach(function(item) {
+                            if (item.code === result.text) {
+                                item.checked = 'checked';
+                                $scope.$apply(); // refresh the $scope
+                            }
+                        });
+                    },
+                    function (error) {
+                        alert("Scanning failed: " + error);
+                    }
+                ));
             }
         }
     ]);
