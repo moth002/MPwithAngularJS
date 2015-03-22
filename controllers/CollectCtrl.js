@@ -1,7 +1,7 @@
 ﻿angular.module('myApp')
     .controller("CollectCtrl", [
-        '$scope', '$http', '$routeParams', 'footerBtnService', 'cordovaReadyService', 'globalIdService', '$q',
-        function ($scope, $http, $routeParams, footerBtnService, cordovaReadyService, globalIdService, $q) {
+        '$scope', '$http', '$routeParams', 'footerBtnService', 'cordovaReadyService', 'globalIdService', '$q', '$ionicPopup',
+        function ($scope, $http, $routeParams, footerBtnService, cordovaReadyService, globalIdService, $q, $ionicPopup) {
             $scope.init = function () {
                 var defer = $q.defer();
 
@@ -53,16 +53,35 @@
                     $scope.user = result;
                 });
 
-                footerBtnService.setRight('Next', true, '#/');
+                var rightButtonClick = function () {
+                    $ionicPopup.prompt({
+                        title: 'Date and Time',
+                        template: 'Please confirm the date and time of the collection',
+                        inputType: 'datetime-local',
+                        inputPlaceholder: new Date(),
+                        okType: 'button-footer'
+                        //buttons: [
+                        //    {
+                        //        text: '<b>Ok</b>',
+                        //        type: 'button-footer',
+                        //        onTap: function(e) { return true; }
+                        //    },
+                        //    { text: 'Cancel', onTap: function(e) { return true; } }
+                        //]
+                    }).then(function (dateTime) {
+                        if (dateTime) {
+                            window.location = '#/complete';
+                        }    
+                    });
+                };
+
+                footerBtnService.setRight('Next', true, rightButtonClick);
                 footerBtnService.setMiddle('', false, null);
                 footerBtnService.setLeft(true);
 
             }
 
-            var options = {
-                date: new Date(),
-                mode: 'datetime'
-            };
+            
 
             $scope.showDatePicker = function() {
                 datePicker.show(options, function (date) {

@@ -46,6 +46,10 @@
             templateUrl: "views/collect.html",
             controller: "CollectCtrl"
         })
+        .when("/complete", {
+            templateUrl: "views/complete.html",
+            controller: "CompleteCtrl"
+        })
         .otherwise({
             redirectTo: '/'
         });
