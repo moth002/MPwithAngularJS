@@ -57,7 +57,7 @@
                     $ionicPopup.prompt({
                         title: 'Date and Time',
                         template: 'Please confirm the date and time of the collection',
-                        inputType: 'datetime-local',
+                        inputType: 'datetime',
                         inputPlaceholder: new Date(),
                         okType: 'button-footer'
                         //buttons: [
