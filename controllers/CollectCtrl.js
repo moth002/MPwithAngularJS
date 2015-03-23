@@ -7,7 +7,8 @@
 
                 $scope.model = {
                     message: "Scan the collected and labelled samples",
-                    chkboxSpecimens: []
+                    chkboxSpecimens: [],
+                    dateTime: undefined
                 }
 
                 defer.promise.then(function () {
@@ -55,22 +56,12 @@
 
                 var rightButtonClick = function () {
                     $ionicPopup.prompt({
-                        title: 'Date and Time',
-                        //subTitle: 'Please confirm the date and time of the collection',
-                        //inputType: 'datetime',
-                        //inputPlaceholder: new Date(),
-                        template: 'Please confirm the date and time of the collection <input style="width: 100%; -webkit-appearance: none; -moz-appearance: none;" type="datetime-local">',
-                        okType: 'button-footer'
-                        //buttons: [
-                        //    {
-                        //        text: '<b>Ok</b>',
-                        //        type: 'button-footer',
-                        //        onTap: function(e) { return true; }
-                        //    },
-                        //    { text: 'Cancel', onTap: function(e) { return true; } }
-                        //]
-                    }).then(function (dateTime) {
-                        if (dateTime) {
+                        title: 'Please confirm',
+                        templateUrl: 'dateTime-Confirm.html',
+                        okType: 'button-footer',
+                        scope: $scope
+                    }).then(function () {
+                        if ($scope.model.dateTime) {
                             window.location = '#/complete';
                         }    
                     });
