@@ -16,7 +16,7 @@
         }
 
         function failure(result) {
-            //alert("Fail to " + result);
+            alert("Fail to " + result);
         };
 
         var labelPrinter = {
