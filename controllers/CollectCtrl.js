@@ -56,10 +56,10 @@
                 var rightButtonClick = function () {
                     $ionicPopup.prompt({
                         title: 'Date and Time',
-                        subTitle: 'Please confirm the date and time of the collection',
+                        //subTitle: 'Please confirm the date and time of the collection',
                         //inputType: 'datetime',
                         //inputPlaceholder: new Date(),
-                        template: '<input style="width: 100%" type="datetime-local">',
+                        template: 'Please confirm the date and time of the collection <input style="width: 100%; -webkit-appearance: none; -moz-appearance: none;" type="datetime-local">',
                         okType: 'button-footer'
                         //buttons: [
                         //    {
