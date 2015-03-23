@@ -50,6 +50,10 @@
             templateUrl: "views/complete.html",
             controller: "CompleteCtrl"
         })
+        .when("/schedule", {
+            templateUrl: "views/schedule.html",
+            controller: "ScheduleCtrl"
+        })
         .otherwise({
             redirectTo: '/'
         });

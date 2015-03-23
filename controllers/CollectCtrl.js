@@ -15,7 +15,7 @@
                     cordovaReadyService(window.plugins.spinnerDialog.hide());
 
                     for (var i = 0; i < $scope.order.Specimens.length; i++) {
-                        $scope.model.chkboxSpecimens.push({ name: $scope.order.Specimens[i], code: $scope.order.Barcodes[i], checked: '' });
+                        $scope.model.chkboxSpecimens.push({ name: $scope.order.Specimens[i], code: $scope.order.Barcodes[i], checked: undefined });
                     }
                 });
 
@@ -62,7 +62,13 @@
                         scope: $scope
                     }).then(function () {
                         if ($scope.model.dateTime) {
-                            window.location = '#/complete';
+                            var needToReschedule = false;
+                            $scope.model.chkboxSpecimens.forEach(function (item) {
+                                if (item.checked === undefined) {
+                                    needToReschedule = true;
+                                }
+                            });
+                            window.location = needToReschedule ? '#/schedule' : '#/complete';
                         }    
                     });
                 };
