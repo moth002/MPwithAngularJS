@@ -1,11 +1,12 @@
 ﻿angular.module('myApp')
     .controller("PatientCtrl", [
-        '$scope', '$http', '$routeParams', 'footerBtnService', 'cordovaReadyService', 'globalIdService', '$q',
-        function ($scope, $http, $routeParams, footerBtnService, cordovaReadyService, globalIdService, $q) {
+        '$scope', '$http', '$routeParams', 'footerBtnService', 'cordovaReadyService', 'globalIdService', '$q', '$ionicPopup',
+        function ($scope, $http, $routeParams, footerBtnService, cordovaReadyService, globalIdService, $q, $ionicPopup) {
             $scope.init = function () {
                 var defer = $q.defer();
 
-                var rightButtonClick = function () { window.location = '#/order/1858' };
+                var rightButtonClick = function () { window.location = '#/order/1dsfgdfg858' };
+                //var rightButtonClick = function () { window.location = '#/order/1858' };
 
                 footerBtnService.setRight('Next', true, rightButtonClick);
                 footerBtnService.setMiddle('', false, null);
@@ -29,12 +30,17 @@
                         defer.resolve();
                     })
                     .error(function (err, status) {
+                        defer.resolve();
                         if (status === 404)
                             alert("Pateint not found");
-                        if (status === 401)
-                            alert("Unauthorized User");
-                        defer.resolve();
-                        window.location = '#/';
+                        if (status === 401) {
+                            $ionicPopup.alert({
+                                template: "<img src='./images/Unauthorised-Error.png' style='max-width: 100%; max-height: 100%;' />",
+                                okType: 'button-footer'
+                            }).then(function () {
+                                window.location = '#/';
+                            });   
+                        }
                     });
 
                 $http.get(window.apiUrl + 'GetUserData', { params: {id: $scope.idList.userId} }).success(function(result) {

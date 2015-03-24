@@ -79,14 +79,6 @@
 
             }
 
-            
-
-            $scope.showDatePicker = function() {
-                datePicker.show(options, function (date) {
-                    alert("date result " + date);
-                });
-            };
-
             $scope.scanCode = function () {
                 cordovaReadyService(window.cordova.plugins.barcodeScanner.scan(
                     function (result) {

@@ -1,7 +1,7 @@
 ﻿angular.module('myApp')
     .controller("OrderCtrl", [
-        '$scope', '$http', '$routeParams', 'footerBtnService', 'cordovaReadyService', 'globalIdService', '$q', 'labelPrintService',
-        function ($scope, $http, $routeParams, footerBtnService, cordovaReadyService, globalIdService, $q, labelPrintService) {
+        '$scope', '$http', '$routeParams', 'footerBtnService', 'cordovaReadyService', 'globalIdService', '$q', 'labelPrintService', '$ionicPopup',
+        function ($scope, $http, $routeParams, footerBtnService, cordovaReadyService, globalIdService, $q, labelPrintService, $ionicPopup) {
             $scope.init = function () {
                 var defer = $q.defer();
 
@@ -28,12 +28,19 @@
                         defer.resolve();
                     })
                     .error(function (err, status) {
-                        if (status === 404)
-                            alert("Order mismatch");
-                        if (status === 401)
-                            alert("Unauthorized User");
                         defer.resolve();
-                        window.location = '#/';
+                        if (status === 404)
+                            $ionicPopup.alert({
+                                template: "<img src='./images/Mismatch-Error.png' style='max-width: 100%; max-height: 100%;' />",
+                                okType: 'button-footer'
+                            }).then(function () {
+                                window.location = '#/patient/' + $scope.idList.patientId;
+                            });
+                        if (status === 401) {
+                            alert("Unauthorized User");
+                            
+                            window.location = '#/';
+                        }
                     });
 
                 $http.post(window.apiUrl + 'GetPatientData', patientModel).success(function (response) {
