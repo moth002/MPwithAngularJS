@@ -1,7 +1,7 @@
 ﻿angular.module('myApp')
     .controller("UserCtrl", [
-        '$scope', '$http', '$routeParams', 'footerBtnService', 'cordovaReadyService', 'globalIdService', '$q',
-        function ($scope, $http, $routeParams, footerBtnService, cordovaReadyService, globalIdService, $q) {
+        '$scope', '$http', '$routeParams', 'footerBtnService', 'cordovaReadyService', 'globalIdService', '$q', '$ionicPopup',
+        function ($scope, $http, $routeParams, footerBtnService, cordovaReadyService, globalIdService, $q, $ionicPopup) {
             $scope.init = function () {
                 var defer = $q.defer();
 
@@ -26,14 +26,23 @@
                         globalIdService.setIDs(userModel.barcode, '', '', response.Token);
                         defer.resolve();
                     })
-                    .error(function(err, status) {
-                        if (status === 404){
-                            alert("User is not found or pincode is wrong");
-                        } else {
-                            alert(err.Message);
-                        }
+                    .error(function (err, status) {
                         defer.resolve();
-                        window.location = '#/';
+                        if (status === 404){
+                            $ionicPopup.alert({
+                                template: "<img src='./images/usercodeAndPin-Warning.png' style='max-width: 100%; max-height: 100%;' />",
+                                okType: 'button-footer'
+                            }).then(function () {
+                                window.location = '#/';
+                            });
+                        } else {
+                            $ionicPopup.alert({
+                                template: err.Message,
+                                okType: 'button-footer'
+                            }).then(function () {
+                                window.location = '#/';
+                            });
+                        }                   
                     });
 
                 $scope.model = {
