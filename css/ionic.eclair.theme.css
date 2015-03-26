@@ -19,7 +19,17 @@
 }.menu.sideMenu .select {
      padding: 11px 30px 0 0; 
      font-size: 10px;
- }
+}
+
+.popup { border-radius: 8px !important; }
+.popup-body { overflow: hidden; }
+
+.spinner svg {
+  width: 68px;
+  height: 68px;
+  stroke: #ffffff;
+  fill: #ffffff;
+}
 
 .checkbox.checkbox-eclair input:before, .checkbox.checkbox-eclair .checkbox-icon:before {
   border-color: #b6d55f; }
@@ -31,15 +41,11 @@
     background-image: linear-gradient(#00b1e8, #0066b3);
     border-bottom: 5px solid #b6d55f;
 }.bar.bar-eclair .title {
-        height: 45px;
+     height: 45px;
 }.bar.bar-eclair.bar-footer {
-        border: 0;
-        border-top: 5px solid #b6d55f;
+     border: 0;
+     border-top: 5px solid #b6d55f;
 }   
-
-.button.button-scan {
-    float: right;
-}
 
 .button.button-footer {
     border-color: #b6d55f;
